@@ -18,9 +18,11 @@ async function startServer() {
   app.use((req, res) => {
     res.send("hello from express apollo server");
   });
-  const connectionString =
-    "mongodb+srv://bhadreshkumarghevariya:bhadobhado@pscluster1.ixor0hh.mongodb.net/?retryWrites=true&w=majority";
+  //   const connectionString =
+  //     "mongodb+srv://bhadreshkumarghevariya:bhadobhado@pscluster1.ixor0hh.mongodb.net/?retryWrites=true&w=majority";
 
+  const connectionString =
+    "mongodb+srv://bhadreshkumarghevariya:bhadobhado@pscluster1.ixor0hh.mongodb.net/proSystemz1";
   await mongoose.connect(connectionString, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
