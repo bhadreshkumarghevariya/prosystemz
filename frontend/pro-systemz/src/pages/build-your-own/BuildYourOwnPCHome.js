@@ -1,4 +1,4 @@
-import { Button, Col, Row, Container } from "react-bootstrap";
+import { Col, Row, Container } from "react-bootstrap";
 import Header from "../../components/Header";
 import { useProductType } from "../../hooks/useProductType";
 import Component from "../../components/build-your-own/Component";
@@ -27,7 +27,8 @@ const BuildYourOwnPCHome = () => {
                 <Col className="text-center" sm={4}>
                   <Component
                     key={productType.id}
-                    productType={productType.productTypeName}
+                    id={productType.id}
+                    productType={productType}
                   />
                 </Col>
               </>

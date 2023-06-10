@@ -2,6 +2,7 @@ import { Button, Container } from "react-bootstrap";
 import Header from "../components/Header";
 import Component from "../components/build-your-own/Component";
 import BuildYourOwnPCHome from "./build-your-own/BuildYourOwnPCHome";
+import { React } from "react";
 
 const Home = () => {
   return (
@@ -13,7 +14,6 @@ const Home = () => {
         </Button>
         <Component productType="MotherBoard" />
       </Container>
-      <BuildYourOwnPCHome></BuildYourOwnPCHome>
     </>
   );
 };
