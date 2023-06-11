@@ -3,10 +3,18 @@ import Header from "../components/Header";
 import { useGetBYOCart } from "../hooks/useGetBYOCart";
 import Cookies from "js-cookie";
 import ProductListItem from "../components/build-your-own/ProductListItem";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const CurrentBuild = (props) => {
-  let getCartId = Cookies.get("cartId");
-  const { error, data, loading } = useGetBYOCart(getCartId);
+  const location = useLocation();
+  const [cartId, setCartId] = useState(Cookies.get("cartId"));
+
+  const { error, data, loading, refetch } = useGetBYOCart(cartId);
+  useEffect(() => {
+    refetch();
+  }, [location]);
+
   if (loading) return <>loading....</>;
   if (error)
     return (

@@ -17,9 +17,9 @@ export const GET_CART_QUERY = gql`
 
 export const useGetBYOCart = (getCartId) => {
   console.log(getCartId);
-  const { error, data, loading } = useQuery(GET_CART_QUERY, {
+  const { error, data, loading, refetch } = useQuery(GET_CART_QUERY, {
     variables: { getCartId },
   });
 
-  return { error, loading, data };
+  return { error, loading, data, refetch };
 };
