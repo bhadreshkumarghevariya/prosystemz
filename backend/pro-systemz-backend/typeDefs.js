@@ -14,8 +14,14 @@ const typeDefs = gql`
     price: Float
   }
 
+  type Cart {
+    id: ID
+    products: [Product]
+  }
+
   type Query {
     getProductType: [ProductType]
+    getCart(id: ID): [Product]
     getAllProducts: [Product]
     getProduct(id: ID): Product
     getProductsByType(productType: ID!): [Product]
@@ -35,6 +41,9 @@ const typeDefs = gql`
   type Mutation {
     createProductType(productType: productTypeInput): ProductType
     createProduct(input: productInput): Product
+    createCart(productId: ID): ID
+    addProductToCart(CartId: ID, productId: ID): [Product]
+    findExitingProductFromCart(CartId: ID, productId: ID): Product
   }
 `;
 
