@@ -21,6 +21,11 @@ const Header = () => {
                 Build Your Own
               </Link>
             </Nav.Item>
+            <Nav.Item>
+              <Link className="nav-link" to="/current-build">
+                Current Build
+              </Link>
+            </Nav.Item>
           </Nav>
         </Container>
       </Navbar>

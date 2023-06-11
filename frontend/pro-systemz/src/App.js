@@ -3,7 +3,8 @@ import Home from "./pages/Home";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import BuildYourOwnPCHome from "./pages/build-your-own/BuildYourOwnPCHome";
-import ProductList from "./pages/build-your-own/ProductList";
+import ProductList from "./components/build-your-own/ProductList";
+import CurrentBuild from "./pages/CurrentBuild";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             path="/product-list/:productTypeName"
             element={<ProductList />}
           />
+          <Route path="/current-build" element={<CurrentBuild />} />
         </Routes>
       </Router>
     </div>

@@ -53,10 +53,11 @@ const resolvers = {
     },
     createCart: async (_, { productId }) => {
       const newCart = await Cart.create({ products: [productId] });
-      return newCart;
+      return newCart.id;
     },
-    addProductToCart: async (_, { cartId, productId }) => {
-      const cart = await Cart.findById(cartId).populate({
+    addProductToCart: async (_, { CartId, productId }) => {
+      console.log(CartId);
+      const cart = await Cart.findById(CartId).populate({
         path: "products",
         populate: {
           path: "productType",

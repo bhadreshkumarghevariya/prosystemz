@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import ProductListItem from "./ProductListItem";
 import { useProductList } from "../../hooks/useProductList";
 import React from "react";
-import Header from "../../components/Header";
+import Header from "../Header";
 import { Container, Table } from "react-bootstrap";
 
 const ProductList = (props) => {
@@ -34,13 +34,15 @@ const ProductList = (props) => {
             <th>Price</th>
           </thead>
           {isData}
-          {data.getProductsByType.map((product) => {
-            return (
-              <>
-                <ProductListItem productObject={product} />
-              </>
-            );
-          })}
+          <tbody>
+            {data.getProductsByType.map((product) => {
+              return (
+                <>
+                  <ProductListItem productObject={product} />
+                </>
+              );
+            })}
+          </tbody>
         </Table>
       </Container>
     </React.Fragment>

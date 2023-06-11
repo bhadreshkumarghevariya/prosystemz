@@ -1,0 +1,55 @@
+import { Container, Table } from "react-bootstrap";
+import Header from "../components/Header";
+import { useGetBYOCart } from "../hooks/useGetBYOCart";
+import Cookies from "js-cookie";
+import ProductListItem from "../components/build-your-own/ProductListItem";
+
+const CurrentBuild = (props) => {
+  let getCartId = Cookies.get("cartId");
+  const { error, data, loading } = useGetBYOCart(getCartId);
+  if (loading) return <>loading....</>;
+  if (error)
+    return (
+      <>
+        <Header></Header>
+        something went wrong...
+        {error.graphQLErrors.map(({ message }, i) => {
+          return <span key={i}>{message}</span>;
+        })}
+      </>
+    );
+  if (data) {
+    console.log(data);
+  }
+  let isData;
+  if (Object.keys(data.getCart).length === 0) {
+    isData = <h1>Sorry.... There is no product Available for this type</h1>;
+  }
+  return (
+    <>
+      <Header></Header>
+      <Container>
+        <Table striped bordered hover>
+          <thead>
+            <th>Product Name</th>
+            <th>Product Type</th>
+            <th>Description</th>
+            <th>Price</th>
+          </thead>
+          {isData}
+          <tbody>
+            {data.getCart.map((product) => {
+              return (
+                <>
+                  <ProductListItem productObject={product} />
+                </>
+              );
+            })}
+          </tbody>
+        </Table>
+      </Container>
+    </>
+  );
+};
+
+export default CurrentBuild;

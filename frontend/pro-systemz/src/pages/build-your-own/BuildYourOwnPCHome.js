@@ -9,12 +9,14 @@ const BuildYourOwnPCHome = () => {
   if (error)
     return (
       <>
+        <Header></Header>
         something went wrong...
         {error.graphQLErrors.map(({ message }, i) => {
           <span key={i}>{message}</span>;
         })}
       </>
     );
+
   return (
     <>
       <Header></Header>
