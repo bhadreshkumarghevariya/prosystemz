@@ -1,8 +1,9 @@
-import { Button } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { CREATE_CART_MUTATION } from "../../mutations/CREATE_CART_MUTATION";
 import { ADD_PRODUCT_TO_CART_MUTATION } from "../../mutations/ADD_PRODUCT_TO_CART_MUTATION";
 import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
 
 const ProductListItem = (props) => {
   const [createCart] = useMutation(CREATE_CART_MUTATION);
@@ -38,19 +39,35 @@ const ProductListItem = (props) => {
   };
   return (
     <tr>
+      <td>
+        <Image src={props.productObject.imageURL} alt="ImageTest" fluid />
+      </td>
       <td>{props.productObject.productName}</td>
       <td>{props.productObject.productType.productTypeName}</td>
       <td>{props.productObject.productShortDescription}</td>
-      <td>{props.productObject.price}</td>
+      <td>${props.productObject.price}</td>
       <td>
-        <Button
-          variant="outline-primary"
-          className="m-3"
-          onClick={() => handleCreateCart(props.productObject.id)}
+        <Link
+          to={"/product-details/" + props.productObject.id}
+          style={{ textDecoration: "none" }}
         >
-          SELECT +
-        </Button>
+          <Button variant="outline-primary" className="m-3">
+            Details
+          </Button>
+        </Link>
       </td>
+
+      {!props.selectBtnIsHide && (
+        <td>
+          <Button
+            variant="outline-primary"
+            className="m-3"
+            onClick={() => handleCreateCart(props.productObject.id)}
+          >
+            SELECT+
+          </Button>
+        </td>
+      )}
     </tr>
   );
 };

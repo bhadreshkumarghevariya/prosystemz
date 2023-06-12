@@ -39,18 +39,22 @@ const CurrentBuild = (props) => {
       <Container>
         <Table striped bordered hover>
           <thead>
-            <th>Product Name</th>
-            <th>Product Type</th>
-            <th>Description</th>
-            <th>Price</th>
+            <tr>
+              <th>Product Name</th>
+              <th>Product Type</th>
+              <th>Description</th>
+              <th>Price</th>
+            </tr>
           </thead>
           {isData}
           <tbody>
             {data.getCart.map((product) => {
               return (
-                <>
-                  <ProductListItem productObject={product} />
-                </>
+                <ProductListItem
+                  key={product.id}
+                  productObject={product}
+                  selectBtnIsHide="true"
+                />
               );
             })}
           </tbody>

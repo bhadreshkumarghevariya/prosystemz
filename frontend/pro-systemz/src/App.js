@@ -10,6 +10,7 @@ import {
 import BuildYourOwnPCHome from "./pages/build-your-own/BuildYourOwnPCHome";
 import ProductList from "./components/build-your-own/ProductList";
 import CurrentBuild from "./pages/CurrentBuild";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
             path="/current-build"
             element={<CurrentBuild />}
             key="current-build"
+          />
+          <Route
+            path="/product-details/:productId"
+            element={<ProductDetails />}
           />
         </Routes>
       </Router>

@@ -25,15 +25,13 @@ const BuildYourOwnPCHome = () => {
         <Row>
           {data.getProductType.map((productType) => {
             return (
-              <>
-                <Col className="text-center" sm={4}>
-                  <Component
-                    key={productType.id}
-                    id={productType.id}
-                    productType={productType}
-                  />
-                </Col>
-              </>
+              <Col className="text-center" sm={4} key={productType.id}>
+                <Component
+                  key={productType.id}
+                  id={productType.id}
+                  productType={productType}
+                />
+              </Col>
             );
           })}
         </Row>

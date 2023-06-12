@@ -28,18 +28,21 @@ const ProductList = (props) => {
       <Container>
         <Table striped bordered hover>
           <thead>
-            <th>Product Name</th>
-            <th>Product Type</th>
-            <th>Description</th>
-            <th>Price</th>
+            <tr>
+              <th>Image</th>
+              <th>Product Name</th>
+              <th>Product Type</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>View Details</th>
+              <th>Select Button</th>
+            </tr>
           </thead>
           {isData}
           <tbody>
             {data.getProductsByType.map((product) => {
               return (
-                <>
-                  <ProductListItem productObject={product} />
-                </>
+                <ProductListItem productObject={product} key={product.id} />
               );
             })}
           </tbody>

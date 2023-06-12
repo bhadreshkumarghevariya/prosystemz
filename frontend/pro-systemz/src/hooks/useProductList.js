@@ -11,6 +11,7 @@ const GET_PRODUCT_LIST_BY_PRODUCT_TYPE = gql`
       }
       productShortDescription
       price
+      imageURL
     }
   }
 `;

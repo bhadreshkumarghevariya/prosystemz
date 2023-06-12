@@ -12,6 +12,7 @@ const typeDefs = gql`
     productType: ProductType
     productShortDescription: String
     price: Float
+    imageURL: String
   }
 
   type Cart {
@@ -36,6 +37,7 @@ const typeDefs = gql`
     productType: ID
     productShortDescription: String
     price: Float
+    imageURL: String
   }
 
   type Mutation {

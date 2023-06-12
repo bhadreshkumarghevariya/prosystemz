@@ -35,14 +35,20 @@ const resolvers = {
       return productType;
     },
     createProduct: async (_, { input }) => {
-      const { productName, productType, productShortDescription, price } =
-        input;
+      const {
+        productName,
+        productType,
+        productShortDescription,
+        price,
+        imageURL,
+      } = input;
 
       const newProduct = new Product({
         productName,
         productType,
         productShortDescription,
         price,
+        imageURL,
       });
 
       await newProduct.save().then((newProduct) => {
@@ -56,7 +62,6 @@ const resolvers = {
       return newCart.id;
     },
     addProductToCart: async (_, { CartId, productId }) => {
-      console.log(CartId);
       const cart = await Cart.findById(CartId).populate({
         path: "products",
         populate: {
