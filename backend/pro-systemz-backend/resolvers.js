@@ -1,6 +1,10 @@
 const Product = require("./models/Product.model");
 const ProductType = require("./models/ProductType.model");
 const Cart = require("./models/Cart.model");
+const User = require("./models/User.model");
+const bcrypt = require("bcrypt");
+
+const { generateToken } = require("./utils/authUtils");
 
 const resolvers = {
   Query: {
@@ -103,6 +107,46 @@ const resolvers = {
       );
 
       return existingProduct;
+    },
+
+    signup: async (_, { username, email, password }) => {
+      // Check if user already exists
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        throw new Error("User with this email already exists.");
+      }
+
+      // Create a new user
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = new User({
+        username,
+        email,
+        password: hashedPassword,
+      });
+      const savedUser = await newUser.save();
+
+      // Generate a token
+      const token = generateToken(savedUser);
+
+      return { token, user: savedUser };
+    },
+    login: async (_, { email, password }) => {
+      // Check if user exists
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw new Error("Invalid email or password.");
+      }
+
+      // Verify password
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      if (!passwordMatch) {
+        throw new Error("Invalid email or password.");
+      }
+
+      // Generate a token
+      const token = generateToken(user);
+
+      return { token, user };
     },
   },
 };

@@ -20,12 +20,24 @@ const typeDefs = gql`
     products: [Product]
   }
 
+  type User {
+    id: ID!
+    username: String!
+    email: String!
+  }
+
+  type AuthPayload {
+    token: String!
+    user: User!
+  }
+
   type Query {
     getProductType: [ProductType]
     getCart(id: ID): [Product]
     getAllProducts: [Product]
     getProduct(id: ID): Product
     getProductsByType(productType: ID!): [Product]
+    getUser(id: ID!): User
   }
 
   input productTypeInput {
@@ -46,6 +58,8 @@ const typeDefs = gql`
     createCart(productId: ID): ID
     addProductToCart(CartId: ID, productId: ID): [Product]
     findExitingProductFromCart(CartId: ID, productId: ID): Product
+    signup(username: String!, email: String!, password: String!): AuthPayload
+    login(email: String!, password: String!): AuthPayload
   }
 `;
 
