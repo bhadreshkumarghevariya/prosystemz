@@ -11,6 +11,8 @@ import BuildYourOwnPCHome from "./pages/build-your-own/BuildYourOwnPCHome";
 import ProductList from "./components/build-your-own/ProductList";
 import CurrentBuild from "./pages/CurrentBuild";
 import ProductDetails from "./pages/ProductDetails";
+import SignupForm from "./pages/SignUpForm";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
             path="/product-details/:productId"
             element={<ProductDetails />}
           />
+          <Route path="/signup" element={<SignupForm />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Router>
     </div>

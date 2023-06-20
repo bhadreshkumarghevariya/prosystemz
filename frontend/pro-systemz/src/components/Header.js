@@ -27,6 +27,18 @@ const Header = () => {
               </Link>
             </Nav.Item>
           </Nav>
+          <Nav className="ml-auto">
+            <Nav.Item>
+              <Link className="nav-link" to="/login">
+                Login
+              </Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link className="nav-link" to="/signup">
+                Signup
+              </Link>
+            </Nav.Item>
+          </Nav>
         </Container>
       </Navbar>
     </>
