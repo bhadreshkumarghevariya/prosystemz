@@ -1,8 +1,6 @@
 import { Container, Nav } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
-import BuildYourOwnPCHome from "../pages/build-your-own/BuildYourOwnPCHome";
-import Home from "../pages/Home";
 
 const Header = () => {
   return (
@@ -24,6 +22,11 @@ const Header = () => {
             <Nav.Item>
               <Link className="nav-link" to="/current-build">
                 Current Build
+              </Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link className="nav-link" to="/add-product">
+                Add Product
               </Link>
             </Nav.Item>
           </Nav>
