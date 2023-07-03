@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import { useAddProduct } from "../hooks/useAddProduct";
 import { useGetProductType } from "../hooks/useGetProductType";
+import Upload from "../components/Upload";
 
 const AddProduct = () => {
   const [productName, setProductName] = useState("");
@@ -22,6 +23,29 @@ const AddProduct = () => {
   const { data } = useGetProductType();
   console.log(data);
 
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+
+      //Make http request to upload file
+      fetch("http://localhost:4000/upload", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.file.path);
+          setImageURL("http://localhost:4000/" + data.file.path);
+          // return data.file.path;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  };
+
   const handleAddProduct = async (e) => {
     e.preventDefault();
     try {
@@ -32,6 +56,7 @@ const AddProduct = () => {
         price,
         imageURL,
       };
+      console.log(input);
       const response = await addProduct(input);
       console.log(response);
     } catch (error) {
@@ -127,8 +152,9 @@ const AddProduct = () => {
                     <Form.Control
                       type="file"
                       placeholder="Enter product image"
-                      value={imageURL}
-                      onChange={(e) => setImageURL(e.target.value)}
+                      onChange={(e) => {
+                        handleFileChange(e);
+                      }}
                     />
                   </FloatingLabel>
                 </Form.Group>
