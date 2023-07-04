@@ -5,6 +5,7 @@ export const GET_PRODUCT_TYPE_QUERY = gql`
     getProductType {
       id
       productTypeName
+      customFields
     }
   }
 `;

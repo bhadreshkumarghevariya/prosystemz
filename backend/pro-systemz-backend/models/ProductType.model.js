@@ -5,6 +5,12 @@ const ProductTypeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  customFields: [
+    {
+      type: Map,
+      of: String,
+    },
+  ],
 });
 
 const ProductType = mongoose.model("productType", ProductTypeSchema);

@@ -4,6 +4,7 @@ const typeDefs = gql`
   type ProductType {
     id: ID
     productTypeName: String
+    customFields: JSON
   }
 
   type Product {
@@ -13,6 +14,7 @@ const typeDefs = gql`
     productShortDescription: String
     price: Float
     imageURL: String
+    productDetails: JSON
   }
 
   type Cart {
@@ -40,8 +42,11 @@ const typeDefs = gql`
     getUser(id: ID!): User
   }
 
+  scalar JSON
+
   input productTypeInput {
     productTypeName: String
+    customFields: JSON
   }
 
   input productInput {
@@ -50,10 +55,14 @@ const typeDefs = gql`
     productShortDescription: String
     price: Float
     imageURL: String
+    productDetails: JSON
   }
 
   type Mutation {
-    createProductType(productType: productTypeInput): ProductType
+    createProductType(
+      productType: productTypeInput
+      customFields: JSON
+    ): ProductType
     createProduct(input: productInput): Product
     createCart(productId: ID): ID
     addProductToCart(CartId: ID, productId: ID): [Product]

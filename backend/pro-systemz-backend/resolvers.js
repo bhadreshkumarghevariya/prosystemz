@@ -34,7 +34,10 @@ const resolvers = {
   Mutation: {
     createProductType: async (parent, args, context, info) => {
       const { productTypeName } = args.productType;
-      const productType = new ProductType({ productTypeName });
+      const { customFields } = args;
+      console.log(customFields);
+      const productType = new ProductType({ productTypeName, customFields });
+      console.log(productType);
       await productType.save();
       return productType;
     },
@@ -45,6 +48,7 @@ const resolvers = {
         productShortDescription,
         price,
         imageURL,
+        productDetails,
       } = input;
 
       const newProduct = new Product({
@@ -53,6 +57,7 @@ const resolvers = {
         productShortDescription,
         price,
         imageURL,
+        productDetails,
       });
 
       await newProduct.save().then((newProduct) => {

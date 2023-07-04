@@ -41,6 +41,11 @@ const Header = () => {
                 Signup
               </Link>
             </Nav.Item>
+            <Nav.Item>
+              <Link className="nav-link" to="/add-product-type">
+                Add Product Type
+              </Link>
+            </Nav.Item>
           </Nav>
         </Container>
       </Navbar>

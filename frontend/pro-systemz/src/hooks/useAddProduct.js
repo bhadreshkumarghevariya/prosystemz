@@ -11,6 +11,7 @@ const ADD_PRODUCT_MUTATION = gql`
       }
       price
       imageURL
+      productDetails
     }
   }
 `;

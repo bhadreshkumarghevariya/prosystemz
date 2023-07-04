@@ -9,6 +9,7 @@ import ProductDetails from "./pages/ProductDetails";
 import SignupForm from "./pages/SignUpForm";
 import LoginPage from "./pages/LoginPage";
 import AddProduct from "./pages/AddProduct";
+import AddProductType from "./pages/AddProductType";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             element={<ProductDetails />}
           />
           <Route path="/add-product" element={<AddProduct />} />
+          <Route path="/add-product-type" element={<AddProductType />} />
           <Route path="/signup" element={<SignupForm />} />
           <Route path="/login" element={<LoginPage />} />
         </Routes>

@@ -20,6 +20,9 @@ const ProductSchema = new mongoose.Schema({
   imageURL: {
     type: String,
   },
+  productDetails: {
+    type: mongoose.Schema.Types.Mixed,
+  },
 });
 
 const Product = mongoose.model("product", ProductSchema);

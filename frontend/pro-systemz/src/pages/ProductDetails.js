@@ -19,6 +19,7 @@ const ProductDetails = (props) => {
 
   let isData;
   if (Object.keys(data.getProduct)) {
+    console.log(data.getProduct);
     isData = <h1>Sorry.... There is no product Available for this type</h1>;
   }
   return (
@@ -36,7 +37,9 @@ const ProductDetails = (props) => {
             <span>
               <h6>Price :{data.getProduct.price}</h6>
             </span>
-            <span>Short Description: {data.getProduct.shortDescription}</span>
+            <span>
+              Short Description: {data.getProduct.productShortDescription}
+            </span>
           </Col>
         </Row>
         <Row></Row>
