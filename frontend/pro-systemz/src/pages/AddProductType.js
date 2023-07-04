@@ -46,7 +46,6 @@ const AddProductType = ({ onSubmit }) => {
 
   return (
     <>
-      <Header></Header>
       <Container className="text-center mt-5">
         <Card className="shadow">
           <Card.Body>
@@ -75,10 +74,10 @@ const AddProductType = ({ onSubmit }) => {
                     <Row key={index}>
                       <Col>
                         <Form.Group>
-                          <Form.Label>Field Name</Form.Label>
+                          <Form.Label>Socket Name</Form.Label>
                           <Form.Control
                             type="text"
-                            placeholder="Enter field name"
+                            placeholder="Enter socket name"
                             value={field.name}
                             onChange={(e) =>
                               handleFieldChange(index, "name", e.target.value)
@@ -89,10 +88,10 @@ const AddProductType = ({ onSubmit }) => {
                       </Col>
                       <Col>
                         <Form.Group>
-                          <Form.Label>Field Type</Form.Label>
+                          <Form.Label>Socket Type</Form.Label>
                           <Form.Control
                             type="text"
-                            placeholder="Enter field type"
+                            placeholder="Enter socket data type"
                             value={field.type}
                             onChange={(e) =>
                               handleFieldChange(index, "type", e.target.value)
@@ -117,7 +116,7 @@ const AddProductType = ({ onSubmit }) => {
                     className="m-2"
                     onClick={handleAddField}
                   >
-                    Add Field
+                    Add A Socket
                   </Button>
                 </Col>
                 <Col></Col>

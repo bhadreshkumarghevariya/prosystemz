@@ -24,7 +24,6 @@ const ProductDetails = (props) => {
   }
   return (
     <>
-      <Header></Header>
       <Container>
         <Row>
           <Col>

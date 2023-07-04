@@ -9,7 +9,6 @@ const BuildYourOwnPCHome = () => {
   if (error)
     return (
       <>
-        <Header></Header>
         something went wrong...
         {error.graphQLErrors.map(({ message }, i) => {
           <span key={i}>{message}</span>;
@@ -19,7 +18,6 @@ const BuildYourOwnPCHome = () => {
 
   return (
     <>
-      <Header></Header>
       <Container className="text-center mt-5">
         BUILD YOUR OWN PC
         <Row>

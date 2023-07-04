@@ -28,7 +28,6 @@ const SignupForm = () => {
 
   return (
     <Container>
-      <Header />
       <Row className="justify-content-sm-center">
         <Col sm={12}>
           <Card style={{ width: "32rem" }} className="m-auto p-3">

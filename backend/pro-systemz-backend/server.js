@@ -28,6 +28,10 @@ async function startServer() {
   const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
+    context: ({ req }) => {
+      const token = req.headers.authorization || "";
+      return { token };
+    },
   });
   app.post("/upload", upload.single("file"), (req, res) => {
     console.log(req.file);

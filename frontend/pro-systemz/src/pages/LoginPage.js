@@ -11,39 +11,51 @@ import {
 import { useLogin } from "../hooks/useLogin";
 import Header from "../components/Header";
 
+const { useNavigate } = require("react-router-dom");
+
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setError] = useState(null);
   const { login, loading, error } = useLogin();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const { token } = await login(email, password);
-      // Login successful, perform any necessary actions (e.g., redirect to dashboard)
-      console.log(token);
-      localStorage.setItem("token", token);
-      setError("Login Successfull");
+      const { token, errorMessage } = await login(email, password);
+      if (errorMessage) {
+        setError(errorMessage);
+      } else {
+        // Login successful, perform any necessary actions (e.g., redirect to dashboard)
+        console.log(token);
+        localStorage.setItem("token", token);
+        setError("Login Successfull");
+        // Clear form fields
+        setEmail("");
+        setPassword("");
+        navigate("/", { replace: true });
+
+        // Reload the entire application after a delay of 100 milliseconds
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+      }
     } catch (error) {
       // Login failed, display error message
       setError(error.message);
+      console.log(error.message);
     }
-
-    // Clear form fields
-    setEmail("");
-    setPassword("");
   };
 
   return (
     <div>
       <Container>
-        <Header />
         <h2>Login</h2>
-
-        {error && <Alert variant="danger">{error}</Alert>}
-        {error && <Alert variant="danger">{err}</Alert>}
+        <Alert variant="danger" show={err !== null}>
+          {err}
+        </Alert>
 
         <Row className="justify-content-sm-center">
           <Col sm={12}>

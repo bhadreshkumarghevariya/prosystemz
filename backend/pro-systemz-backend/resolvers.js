@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const Product = require("./models/Product.model");
 const ProductType = require("./models/ProductType.model");
 const Cart = require("./models/Cart.model");
@@ -29,6 +30,24 @@ const resolvers = {
         },
       });
       return cart.products;
+    },
+    getUserDetails: async (parent, args, context) => {
+      console.log(parent);
+      console.log(args);
+      console.log(context);
+      const req = context.req;
+      console.log(req);
+      const token = context.token;
+      if (!token) {
+        throw new Error("You are not authenticated!");
+      } else {
+        const decodedToken = jwt.verify(token, "your-secret-key");
+        console.log(decodedToken);
+
+        const userId = decodedToken.userId;
+        const user = await User.findById(userId);
+        return user;
+      }
     },
   },
   Mutation: {

@@ -19,7 +19,6 @@ const CurrentBuild = (props) => {
   if (error)
     return (
       <>
-        <Header></Header>
         something went wrong...
         {error.graphQLErrors.map(({ message }, i) => {
           return <span key={i}>{message}</span>;
@@ -35,7 +34,6 @@ const CurrentBuild = (props) => {
   }
   return (
     <>
-      <Header></Header>
       <Container>
         <Table striped bordered hover>
           <thead>

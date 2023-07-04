@@ -40,6 +40,7 @@ const typeDefs = gql`
     getProduct(id: ID): Product
     getProductsByType(productType: ID!): [Product]
     getUser(id: ID!): User
+    getUserDetails: User
   }
 
   scalar JSON

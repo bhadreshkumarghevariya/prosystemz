@@ -83,7 +83,6 @@ const AddProduct = () => {
   };
   return (
     <>
-      <Header></Header>
       <Container className="text-center mt-5">
         <Card className="shadow">
           <Card.Body>
