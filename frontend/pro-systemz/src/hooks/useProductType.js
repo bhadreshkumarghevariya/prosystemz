@@ -5,6 +5,8 @@ const GET_PRODUCT_TYPES = gql`
     getProductType {
       id
       productTypeName
+      customFields
+      imageURL
     }
   }
 `;

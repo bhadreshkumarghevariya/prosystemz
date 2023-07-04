@@ -11,6 +11,9 @@ const ProductTypeSchema = new mongoose.Schema({
       of: String,
     },
   ],
+  imageURL: {
+    type: String,
+  },
 });
 
 const ProductType = mongoose.model("productType", ProductTypeSchema);

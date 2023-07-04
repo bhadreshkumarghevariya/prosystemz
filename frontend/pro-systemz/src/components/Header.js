@@ -11,15 +11,14 @@ const Header = ({ isLoggedIn }) => {
 
   return (
     <>
-      <Navbar bg="light">
+      <Navbar className="shadow mt-2" bg="light">
         <Container>
-          <Navbar.Brand>Pro Systemz</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Item>
-              <Link className="nav-link" to="/">
-                Home
-              </Link>
-            </Nav.Item>
+          <Navbar.Brand className="font-weight-bold">
+            <Link className="nav-link" to="/">
+              Pro Systemz
+            </Link>
+          </Navbar.Brand>
+          <Nav className="mr-auto">
             <Nav.Item>
               <Link className="nav-link" to="/build-your-own">
                 Build Your Own

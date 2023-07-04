@@ -54,8 +54,13 @@ const resolvers = {
     createProductType: async (parent, args, context, info) => {
       const { productTypeName } = args.productType;
       const { customFields } = args;
+      const { imageURL } = args;
       console.log(customFields);
-      const productType = new ProductType({ productTypeName, customFields });
+      const productType = new ProductType({
+        productTypeName,
+        customFields,
+        imageURL,
+      });
       console.log(productType);
       await productType.save();
       return productType;

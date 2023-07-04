@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+a{
+  text-decoration: none !important;
+}
+a:hover{
+  color: #f00; /* Change the color to your desired hover color */
+  text-decoration: underline; 
+}
+
+
+.nav-link:hover {
+  color: #f00; /* Change the color to your desired hover color */
+  text-decoration: underline; /* Add underline on hover */
+}

@@ -23,6 +23,12 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.card-title{
+  text-decoration: none !important;
+}
+a{
+  text-decoration: none !important;
+}
 
 .App-link {
   color: #61dafb;

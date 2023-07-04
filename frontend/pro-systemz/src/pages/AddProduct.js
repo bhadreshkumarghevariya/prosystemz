@@ -21,8 +21,6 @@ const AddProduct = () => {
   const [imageURL, setImageURL] = useState("");
   const [customFields, setCustomFields] = useState([]);
   const [productDetails, setProductDetails] = useState([]); // [key: string]: string | number | boolean | string[] | number[
-  const [ports, setPorts] = useState([]);
-  const [err, setError] = useState(null);
   const { addProduct, loading, error } = useAddProduct();
   const { data } = useGetProductType();
 

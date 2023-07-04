@@ -9,7 +9,8 @@ import {
   Card,
 } from "react-bootstrap";
 import { useLogin } from "../hooks/useLogin";
-import Header from "../components/Header";
+import { emailValidator, passwordValidator } from "../validations";
+import { useEffect } from "react";
 
 const { useNavigate } = require("react-router-dom");
 
@@ -17,13 +18,29 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setError] = useState(null);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
   const { login, loading, error } = useLogin();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setEmailError(emailValidator(email));
+    setPasswordError(passwordValidator(password));
+  }, [email, password]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
+      (await passwordValidator(password))
+        ? setPasswordError(true)
+        : setPasswordError(false);
+      (await emailValidator(email))
+        ? setEmailError(true)
+        : setEmailError(false);
+      if (emailError || passwordError) {
+        return;
+      }
       const { token, errorMessage } = await login(email, password);
       if (errorMessage) {
         setError(errorMessage);
@@ -37,10 +54,10 @@ const LoginPage = () => {
         setPassword("");
         navigate("/", { replace: true });
 
-        // Reload the entire application after a delay of 100 milliseconds
+        // Reload the entire application after a delay of 10 milliseconds
         setTimeout(() => {
           window.location.reload();
-        }, 100);
+        }, 2);
       }
     } catch (error) {
       // Login failed, display error message
@@ -68,6 +85,12 @@ const LoginPage = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
+                  {emailValidator(email)}
+                  {emailError && (
+                    <div className="alert alert-danger my-3" role="alert">
+                      The email address is not valid.
+                    </div>
+                  )}
                 </Form.Group>
 
                 <Form.Group controlId="password">
@@ -77,6 +100,14 @@ const LoginPage = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
+                  {passwordValidator(password)}
+                  {passwordError && (
+                    <div className="alert alert-danger my-3" role="alert">
+                      The password must contain at least 1 lowercase, 1
+                      uppercase, 1 numeric character, and be at least 8
+                      characters long.
+                    </div>
+                  )}
                 </Form.Group>
 
                 <Button

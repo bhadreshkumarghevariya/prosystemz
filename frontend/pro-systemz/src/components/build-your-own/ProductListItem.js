@@ -39,8 +39,15 @@ const ProductListItem = (props) => {
   };
   return (
     <tr>
-      <td>
-        <Image src={props.productObject.imageURL} alt="ImageTest" fluid />
+      <td className="p-auto">
+        <Image
+          src={props.productObject.imageURL}
+          alt="ImageTest"
+          width="100"
+          height="100"
+          className="mx-auto"
+          fluid
+        />
       </td>
       <td>{props.productObject.productName}</td>
       <td>{props.productObject.productType.productTypeName}</td>

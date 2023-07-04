@@ -12,6 +12,7 @@ const GET_PRODUCT_BY_ID = gql`
         productTypeName
       }
       productShortDescription
+      productDetails
     }
   }
 `;

@@ -23,7 +23,7 @@ const LogoutPage = () => {
     // Reload the entire application after a delay of 500 milliseconds
     setTimeout(() => {
       window.location.reload();
-    }, 100);
+    }, 2);
   };
 
   return (

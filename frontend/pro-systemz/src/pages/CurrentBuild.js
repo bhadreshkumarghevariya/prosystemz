@@ -35,9 +35,10 @@ const CurrentBuild = (props) => {
   return (
     <>
       <Container>
-        <Table striped bordered hover>
+        <Table className="m-3" striped bordered hover>
           <thead>
             <tr>
+              <th>Product Image</th>
               <th>Product Name</th>
               <th>Product Type</th>
               <th>Description</th>

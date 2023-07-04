@@ -5,6 +5,7 @@ const typeDefs = gql`
     id: ID
     productTypeName: String
     customFields: JSON
+    imageURL: String
   }
 
   type Product {
@@ -48,6 +49,7 @@ const typeDefs = gql`
   input productTypeInput {
     productTypeName: String
     customFields: JSON
+    imageURL: String
   }
 
   input productInput {
@@ -63,6 +65,7 @@ const typeDefs = gql`
     createProductType(
       productType: productTypeInput
       customFields: JSON
+      imageURL: String
     ): ProductType
     createProduct(input: productInput): Product
     createCart(productId: ID): ID

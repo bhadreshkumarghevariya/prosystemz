@@ -25,7 +25,7 @@ const ProductList = (props) => {
   return (
     <React.Fragment>
       <Container>
-        <Table striped bordered hover>
+        <Table className="m-3" striped bordered hover>
           <thead>
             <tr>
               <th>Image</th>

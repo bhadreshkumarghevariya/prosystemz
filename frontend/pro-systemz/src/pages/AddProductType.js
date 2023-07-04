@@ -6,10 +6,35 @@ import Header from "../components/Header";
 const AddProductType = ({ onSubmit }) => {
   const [productTypeName, setProductTypeName] = useState("");
   const [customFields, setCustomFields] = useState([]);
+
+  const [imageURL, setImageURL] = useState("");
   const { createProductType, data, loading, error } = useCreateProductType();
 
   const handleAddField = () => {
     setCustomFields([...customFields, { name: "", type: "" }]);
+  };
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+
+      //Make http request to upload file
+      fetch("http://localhost:4000/upload", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.file.path);
+          setImageURL("http://localhost:4000/" + data.file.path);
+          // return data.file.path;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   const handleFieldChange = (index, fieldProp, value) => {
@@ -36,6 +61,7 @@ const AddProductType = ({ onSubmit }) => {
         variables: {
           productType,
           customFields,
+          imageURL,
         },
       });
       console.log(response);
@@ -61,6 +87,18 @@ const AddProductType = ({ onSubmit }) => {
                       placeholder="Enter product type name"
                       value={productTypeName}
                       onChange={(e) => setProductTypeName(e.target.value)}
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Product Type Image</Form.Label>
+                    <Form.Control
+                      type="file"
+                      placeholder="Enter product type image"
+                      // value={productTypeImage}
+                      onChange={(e) => {
+                        handleFileChange(e);
+                      }}
                       required
                     />
                   </Form.Group>

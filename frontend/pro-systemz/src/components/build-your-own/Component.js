@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 const Component = ({ productType }) => {
   const productTypeName = productType.productTypeName;
   const productTypeId = productType.id;
+  const imageURL = productType.imageURL;
 
   return (
     <Link to={"/product-list/" + productTypeId}>
@@ -11,7 +12,7 @@ const Component = ({ productType }) => {
         style={{ width: "15rem", height: "15rem" }}
       >
         <Card.Body>
-          <Card.Img variant="top"></Card.Img>
+          <Card.Img variant="top" src={imageURL}></Card.Img>
           <Card.Title>{productTypeName}</Card.Title>
         </Card.Body>
       </Card>
