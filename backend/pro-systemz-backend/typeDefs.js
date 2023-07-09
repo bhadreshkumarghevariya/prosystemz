@@ -23,10 +23,16 @@ const typeDefs = gql`
     products: [Product]
   }
 
+  type UserType {
+    id: ID
+    userTypeName: String
+  }
+
   type User {
     id: ID!
     username: String!
     email: String!
+    userType: UserType!
   }
 
   type AuthPayload {
@@ -67,11 +73,17 @@ const typeDefs = gql`
       customFields: JSON
       imageURL: String
     ): ProductType
+    createUserType(userTypeName: String): UserType
     createProduct(input: productInput): Product
     createCart(productId: ID): ID
     addProductToCart(CartId: ID, productId: ID): [Product]
     findExitingProductFromCart(CartId: ID, productId: ID): Product
-    signup(username: String!, email: String!, password: String!): AuthPayload
+    signup(
+      username: String!
+      email: String!
+      password: String!
+      userType: ID
+    ): AuthPayload
     login(email: String!, password: String!): AuthPayload
   }
 `;

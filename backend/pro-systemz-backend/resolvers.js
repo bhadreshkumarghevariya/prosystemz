@@ -3,6 +3,7 @@ const Product = require("./models/Product.model");
 const ProductType = require("./models/ProductType.model");
 const Cart = require("./models/Cart.model");
 const User = require("./models/User.model");
+const UserType = require("./models/UserType.Model");
 const bcrypt = require("bcrypt");
 
 const { generateToken } = require("./utils/authUtils");
@@ -51,6 +52,13 @@ const resolvers = {
     },
   },
   Mutation: {
+    createUserType: async (_, { userTypeName }) => {
+      const newUserType = new UserType({
+        userTypeName,
+      });
+      await newUserType.save();
+      return newUserType;
+    },
     createProductType: async (parent, args, context, info) => {
       const { productTypeName } = args.productType;
       const { customFields } = args;
@@ -138,7 +146,7 @@ const resolvers = {
       return existingProduct;
     },
 
-    signup: async (_, { username, email, password }) => {
+    signup: async (_, { username, email, password, userType }) => {
       // Check if user already exists
       const existingUser = await User.findOne({ email });
       if (existingUser) {
@@ -151,8 +159,11 @@ const resolvers = {
         username,
         email,
         password: hashedPassword,
+        userType,
       });
-      const savedUser = await newUser.save();
+      const savedUser = await newUser.save().then((newUser) => {
+        return newUser.populate("userType");
+      });
 
       // Generate a token
       const token = generateToken(savedUser);
