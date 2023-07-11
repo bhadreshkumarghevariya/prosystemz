@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import {
+  Alert,
+  Button,
+  Card,
+  Col,
+  Container,
+  FloatingLabel,
+  Form,
+  Row,
+} from "react-bootstrap";
 import { useCreateProductType } from "../hooks/useCreateProductType";
 import Header from "../components/Header";
 
@@ -7,6 +16,8 @@ const AddProductType = ({ onSubmit }) => {
   const [productTypeName, setProductTypeName] = useState("");
   const [customFields, setCustomFields] = useState([]);
 
+  const [success, setSuccess] = useState(false);
+  const [err, setError] = useState(null);
   const [imageURL, setImageURL] = useState("");
   const { createProductType, data, loading, error } = useCreateProductType();
 
@@ -65,42 +76,60 @@ const AddProductType = ({ onSubmit }) => {
         },
       });
       console.log(response);
+      setProductTypeName("");
+      setCustomFields([]);
+      setSuccess(true);
+      setError(null);
     } catch (error) {
+      setError(error);
+      setSuccess(false);
       console.log(error);
     }
   };
 
   return (
     <>
+      <Alert
+        variant="success"
+        className="mt-5 col-4 m-auto"
+        show={success !== false}
+      >
+        <p>Product Type Added Successfully</p>
+      </Alert>
+      <Alert variant="danger" className="mt-5 col-4 m-auto" show={err !== null}>
+        <p>{err}</p>
+      </Alert>
       <Container className="text-center mt-5">
         <Card className="shadow">
-          <Card.Body>
+          <Card.Body className="m-4">
             <Card.Title>Add Product Type</Card.Title>
             <Form onSubmit={handleSubmit}>
               <Row>
                 <Col></Col>
                 <Col className="m-2" xs={8}>
-                  <Form.Group>
-                    <Form.Label>Product Type Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter product type name"
-                      value={productTypeName}
-                      onChange={(e) => setProductTypeName(e.target.value)}
-                      required
-                    />
+                  <Form.Group className="m-2">
+                    <FloatingLabel label="Product Type Name">
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter product type name"
+                        value={productTypeName}
+                        onChange={(e) => setProductTypeName(e.target.value)}
+                        required
+                      />
+                    </FloatingLabel>
                   </Form.Group>
-                  <Form.Group>
-                    <Form.Label>Product Type Image</Form.Label>
-                    <Form.Control
-                      type="file"
-                      placeholder="Enter product type image"
-                      // value={productTypeImage}
-                      onChange={(e) => {
-                        handleFileChange(e);
-                      }}
-                      required
-                    />
+                  <Form.Group className="m-2">
+                    <FloatingLabel label="Product Type Image">
+                      <Form.Control
+                        type="file"
+                        placeholder="Enter product type image"
+                        // value={productTypeImage}
+                        onChange={(e) => {
+                          handleFileChange(e);
+                        }}
+                        required
+                      />
+                    </FloatingLabel>
                   </Form.Group>
                 </Col>
                 <Col></Col>
@@ -111,31 +140,33 @@ const AddProductType = ({ onSubmit }) => {
                   {customFields.map((field, index) => (
                     <Row key={index}>
                       <Col>
-                        <Form.Group>
-                          <Form.Label>Socket Name</Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter socket name"
-                            value={field.name}
-                            onChange={(e) =>
-                              handleFieldChange(index, "name", e.target.value)
-                            }
-                            required
-                          />
+                        <Form.Group className="m-2">
+                          <FloatingLabel label="Socket Name">
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter socket name"
+                              value={field.name}
+                              onChange={(e) =>
+                                handleFieldChange(index, "name", e.target.value)
+                              }
+                              required
+                            />
+                          </FloatingLabel>
                         </Form.Group>
                       </Col>
                       <Col>
-                        <Form.Group>
-                          <Form.Label>Socket Type</Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter socket data type"
-                            value={field.type}
-                            onChange={(e) =>
-                              handleFieldChange(index, "type", e.target.value)
-                            }
-                            required
-                          />
+                        <Form.Group className="m-2">
+                          <FloatingLabel label="Socket Type">
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter socket data type"
+                              value={field.type}
+                              onChange={(e) =>
+                                handleFieldChange(index, "type", e.target.value)
+                              }
+                              required
+                            />
+                          </FloatingLabel>
                         </Form.Group>
                       </Col>
                       <Col>

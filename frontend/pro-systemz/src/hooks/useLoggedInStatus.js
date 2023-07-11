@@ -10,6 +10,7 @@ const useLoggedInStatus = () => {
     console.log(data);
     if (data && data.getUserDetails) {
       console.log("setting is logged in to true");
+      console.log(data.getUserDetails);
       setIsLoggedIn(true);
     }
     return () => {
@@ -17,7 +18,7 @@ const useLoggedInStatus = () => {
     };
   }, [data]);
 
-  return isLoggedIn;
+  return { isLoggedIn, data };
 };
 
 export default useLoggedInStatus;

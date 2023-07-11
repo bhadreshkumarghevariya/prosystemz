@@ -6,6 +6,10 @@ export const GET_USER_DETAILS = gql`
       id
       username
       email
+      userType {
+        id
+        userTypeName
+      }
     }
   }
 `;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Button,
   Card,
   Col,
@@ -20,6 +21,8 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [customFields, setCustomFields] = useState([]);
+  const [success, setSuccess] = useState(false);
+  const [err, setError] = useState(null);
   const [productDetails, setProductDetails] = useState([]); // [key: string]: string | number | boolean | string[] | number[
   const { addProduct, loading, error } = useAddProduct();
   const { data } = useGetProductType();
@@ -75,7 +78,17 @@ const AddProduct = () => {
       console.log(input);
       const response = await addProduct(input);
       console.log(response);
+      setProductName("");
+      setProductShortDescription("");
+      setProductType("");
+      setPrice("");
+      setImageURL("");
+      setProductDetails([]);
+      setSuccess(true);
+      setError(null);
     } catch (error) {
+      setError(error.message);
+      setSuccess(false);
       throw new Error(error.message);
     }
   };
@@ -219,6 +232,20 @@ const AddProduct = () => {
               <Button variant="primary" className="m-2" type="submit">
                 Add Product
               </Button>
+              <Alert
+                variant="success"
+                className="mt-5 col-4 m-auto"
+                show={success !== false}
+              >
+                <p>Product Type Added Successfully</p>
+              </Alert>
+              <Alert
+                variant="danger"
+                className="mt-5 col-4 m-auto"
+                show={err !== null}
+              >
+                <p>{err}</p>
+              </Alert>
             </Form>
           </Card.Body>
         </Card>

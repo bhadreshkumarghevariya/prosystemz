@@ -6,12 +6,13 @@ import { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_USER_DETAILS } from "../mutations/GET_USER_DETAILS";
 
-const Header = ({ isLoggedIn }) => {
-  console.log("Header");
+const Header = ({ isLoggedIn, userType }) => {
+  console.log(userType);
+  console.log(isLoggedIn);
 
   return (
     <>
-      <Navbar className="shadow mt-2" bg="light">
+      <Navbar className="shadow " bg="light">
         <Container>
           <Navbar.Brand className="font-weight-bold">
             <Link className="nav-link" to="/">
@@ -32,10 +33,17 @@ const Header = ({ isLoggedIn }) => {
               </Nav.Item>
             )}
 
-            {isLoggedIn && (
+            {isLoggedIn && userType == "Admin" && (
               <Nav.Item>
                 <Link className="nav-link" to="/add-product">
                   Add Product
+                </Link>
+              </Nav.Item>
+            )}
+            {isLoggedIn && userType == "Admin" && (
+              <Nav.Item>
+                <Link className="nav-link" to="/customer-list">
+                  Customer List
                 </Link>
               </Nav.Item>
             )}
@@ -67,11 +75,13 @@ const Header = ({ isLoggedIn }) => {
                   Profile
                 </Link>
               </Nav.Item>
-              <Nav.Item>
-                <Link className="nav-link" to="/add-product-type">
-                  Add Product Type
-                </Link>
-              </Nav.Item>
+              {userType == "Admin" && (
+                <Nav.Item>
+                  <Link className="nav-link" to="/add-product-type">
+                    Add Product Type
+                  </Link>
+                </Nav.Item>
+              )}
             </Nav>
           )}
         </Container>

@@ -15,19 +15,28 @@ import AddProduct from "./pages/AddProduct";
 import AddProductType from "./pages/AddProductType";
 import UserProfile from "./pages/UserProfile";
 import LogoutPage from "./pages/LogOut";
+import CustomerList from "./pages/CustomerList";
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
+import EditUser from "./pages/EditUser";
 const PrivateRoute = ({ children, isLoggedIn, component }) => {
   return isLoggedIn ? component : <Navigate to="/login" />;
 };
 
 function App() {
-  const isLoggedIn = useLoggedInStatus();
+  const { isLoggedIn, data } = useLoggedInStatus();
+  console.log(data);
+  console.log(data && data.getUserDetails.userType.userTypeName);
+  // console.log(data.getUserDetails.userType.userTypeName);
+
   return (
     <div className="App">
       <Router>
-        <Header isLoggedIn={isLoggedIn} />
+        <Header
+          isLoggedIn={isLoggedIn}
+          userType={data && data.getUserDetails.userType.userTypeName}
+        />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/build-your-own" element={<BuildYourOwnPCHome />} />
@@ -67,6 +76,15 @@ function App() {
             }
           />
           <Route
+            path="/customer-list"
+            element={
+              <PrivateRoute
+                isLoggedIn={isLoggedIn}
+                component={<CustomerList />}
+              />
+            }
+          />
+          <Route
             path="/add-product-type"
             element={
               <PrivateRoute
@@ -75,6 +93,7 @@ function App() {
               />
             }
           />
+          <Route path="/edit-user/:userId" element={<EditUser />} />
           <Route path="/logout" element={<LogoutPage />} />
         </Routes>
       </Router>

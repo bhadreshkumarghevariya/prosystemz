@@ -1,4 +1,4 @@
-import { Container, Table } from "react-bootstrap";
+import { Container, Table, Card } from "react-bootstrap";
 import Header from "../components/Header";
 import { useGetBYOCart } from "../hooks/useGetBYOCart";
 import Cookies from "js-cookie";
@@ -35,29 +35,34 @@ const CurrentBuild = (props) => {
   return (
     <>
       <Container>
-        <Table className="m-3" striped bordered hover>
-          <thead>
-            <tr>
-              <th>Product Image</th>
-              <th>Product Name</th>
-              <th>Product Type</th>
-              <th>Description</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          {isData}
-          <tbody>
-            {data.getCart.map((product) => {
-              return (
-                <ProductListItem
-                  key={product.id}
-                  productObject={product}
-                  selectBtnIsHide="true"
-                />
-              );
-            })}
-          </tbody>
-        </Table>
+        <Card className="m-3">
+          <Card.Body>
+            <Table className="table text-nowrap mb-0 table-centered table-hover">
+              <thead>
+                <tr>
+                  <th>Product Image</th>
+                  <th>Product Name</th>
+                  <th>Product Type</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>View Details</th>
+                </tr>
+              </thead>
+              {isData}
+              <tbody>
+                {data.getCart.map((product) => {
+                  return (
+                    <ProductListItem
+                      key={product.id}
+                      productObject={product}
+                      selectBtnIsHide="true"
+                    />
+                  );
+                })}
+              </tbody>
+            </Table>
+          </Card.Body>
+        </Card>
       </Container>
     </>
   );

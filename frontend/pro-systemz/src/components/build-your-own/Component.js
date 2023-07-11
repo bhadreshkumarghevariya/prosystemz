@@ -9,10 +9,14 @@ const Component = ({ productType }) => {
     <Link to={"/product-list/" + productTypeId}>
       <Card
         className="text-center m-auto my-4 text-center"
-        style={{ width: "15rem", height: "15rem" }}
+        style={{ width: "20rem", height: "20rem" }}
       >
         <Card.Body>
-          <Card.Img variant="top" src={imageURL}></Card.Img>
+          <Card.Img
+            className="p-4 rounded-lg"
+            variant="top"
+            src={imageURL}
+          ></Card.Img>
           <Card.Title>{productTypeName}</Card.Title>
         </Card.Body>
       </Card>

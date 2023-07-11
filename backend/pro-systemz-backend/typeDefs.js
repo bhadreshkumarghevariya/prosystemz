@@ -32,7 +32,7 @@ const typeDefs = gql`
     id: ID!
     username: String!
     email: String!
-    userType: UserType!
+    userType: UserType
   }
 
   type AuthPayload {
@@ -48,6 +48,8 @@ const typeDefs = gql`
     getProductsByType(productType: ID!): [Product]
     getUser(id: ID!): User
     getUserDetails: User
+    getAllUsers: [User]
+    getAllUserTypes: [UserType]
   }
 
   scalar JSON

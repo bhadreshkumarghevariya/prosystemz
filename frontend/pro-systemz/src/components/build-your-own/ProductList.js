@@ -3,7 +3,7 @@ import ProductListItem from "./ProductListItem";
 import { useProductList } from "../../hooks/useProductList";
 import React from "react";
 import Header from "../Header";
-import { Container, Table } from "react-bootstrap";
+import { Container, Table, Card } from "react-bootstrap";
 
 const ProductList = (props) => {
   const { productTypeName, productTypeId } = useParams();
@@ -25,27 +25,31 @@ const ProductList = (props) => {
   return (
     <React.Fragment>
       <Container>
-        <Table className="m-3" striped bordered hover>
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Product Name</th>
-              <th>Product Type</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>View Details</th>
-              <th>Select Button</th>
-            </tr>
-          </thead>
-          {isData}
-          <tbody>
-            {data.getProductsByType.map((product) => {
-              return (
-                <ProductListItem productObject={product} key={product.id} />
-              );
-            })}
-          </tbody>
-        </Table>
+        <Card className="m-3">
+          <Card.Body>
+            <Table className="table text-nowrap mb-0 table-centered table-hover">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Product Name</th>
+                  <th>Product Type</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>View Details</th>
+                  <th>Add to Build</th>
+                </tr>
+              </thead>
+              {isData}
+              <tbody>
+                {data.getProductsByType.map((product) => {
+                  return (
+                    <ProductListItem productObject={product} key={product.id} />
+                  );
+                })}
+              </tbody>
+            </Table>
+          </Card.Body>
+        </Card>
       </Container>
     </React.Fragment>
   );

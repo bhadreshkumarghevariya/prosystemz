@@ -18,6 +18,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setError] = useState(null);
+  const [successful, setSuccessful] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const { login, loading, error } = useLogin();
@@ -72,6 +73,9 @@ const LoginPage = () => {
         <h2>Login</h2>
         <Alert variant="danger" show={err !== null}>
           {err}
+        </Alert>
+        <Alert variant="success" show={successful !== false}>
+          {successful}
         </Alert>
 
         <Row className="justify-content-sm-center">

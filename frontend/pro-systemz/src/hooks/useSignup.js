@@ -8,6 +8,10 @@ const SIGNUP_MUTATION = gql`
         email
         id
         username
+        userType {
+          id
+          userTypeName
+        }
       }
     }
   }

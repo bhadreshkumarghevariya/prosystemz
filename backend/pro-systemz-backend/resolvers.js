@@ -46,9 +46,19 @@ const resolvers = {
         console.log(decodedToken);
 
         const userId = decodedToken.userId;
-        const user = await User.findById(userId);
+        const user = await User.findById(userId).populate("userType");
+        console.log(user);
         return user;
       }
+    },
+    getAllUsers: async () => {
+      return await User.find().populate("userType");
+    },
+    getUser: async (_, { id }) => {
+      return await User.findById(id).populate("userType");
+    },
+    getAllUserTypes: async () => {
+      return await UserType.find();
     },
   },
   Mutation: {
@@ -147,6 +157,9 @@ const resolvers = {
     },
 
     signup: async (_, { username, email, password, userType }) => {
+      if (!userType) {
+        userType = "64ab068b98352732c475c3f3";
+      }
       // Check if user already exists
       const existingUser = await User.findOne({ email });
       if (existingUser) {

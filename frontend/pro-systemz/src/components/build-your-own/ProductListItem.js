@@ -4,6 +4,8 @@ import { CREATE_CART_MUTATION } from "../../mutations/CREATE_CART_MUTATION";
 import { ADD_PRODUCT_TO_CART_MUTATION } from "../../mutations/ADD_PRODUCT_TO_CART_MUTATION";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import DetailsButton from "../DetailsButton";
+import SelectButton from "../SelectButton";
 
 const ProductListItem = (props) => {
   const [createCart] = useMutation(CREATE_CART_MUTATION);
@@ -58,21 +60,22 @@ const ProductListItem = (props) => {
           to={"/product-details/" + props.productObject.id}
           style={{ textDecoration: "none" }}
         >
-          <Button variant="outline-primary" className="m-3">
-            Details
-          </Button>
+          <DetailsButton />
         </Link>
       </td>
 
       {!props.selectBtnIsHide && (
         <td>
-          <Button
+          <SelectButton
+            onClick={() => handleCreateCart(props.productObject.id)}
+          />
+          {/* <Button
             variant="outline-primary"
             className="m-3"
             onClick={() => handleCreateCart(props.productObject.id)}
           >
             SELECT+
-          </Button>
+          </Button> */}
         </td>
       )}
     </tr>
