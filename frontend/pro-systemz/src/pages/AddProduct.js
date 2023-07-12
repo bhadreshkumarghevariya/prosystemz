@@ -96,7 +96,7 @@ const AddProduct = () => {
     <>
       <Container className="text-center mt-5">
         <Card className="shadow">
-          <Card.Body>
+          <Card.Body className="m-4">
             <Card.Title>Add Product</Card.Title>
             <Form onSubmit={handleAddProduct}>
               <Row>

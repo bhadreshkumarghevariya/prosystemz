@@ -3,11 +3,13 @@ import ProductListItem from "./ProductListItem";
 import { useProductList } from "../../hooks/useProductList";
 import React from "react";
 import Header from "../Header";
-import { Container, Table, Card } from "react-bootstrap";
+import { Container, Table, Card, Alert } from "react-bootstrap";
+import { useState } from "react";
 
 const ProductList = (props) => {
   const { productTypeName, productTypeId } = useParams();
   const { error, data, loading } = useProductList(productTypeName);
+  const [productAddedToBuild, setProductAddedToBuild] = useState(false);
   if (loading) return <>loading....</>;
   if (error)
     return (
@@ -43,13 +45,25 @@ const ProductList = (props) => {
               <tbody>
                 {data.getProductsByType.map((product) => {
                   return (
-                    <ProductListItem productObject={product} key={product.id} />
+                    <ProductListItem
+                      productObject={product}
+                      key={product.id}
+                      productAddedToBuild={productAddedToBuild}
+                      setProductAddedToBuild={setProductAddedToBuild}
+                    />
                   );
                 })}
               </tbody>
             </Table>
           </Card.Body>
         </Card>
+        <Alert
+          variant="success"
+          className="mt-5 col-4 m-auto"
+          show={productAddedToBuild !== false}
+        >
+          <p>Product Added to Current Build</p>
+        </Alert>
       </Container>
     </React.Fragment>
   );

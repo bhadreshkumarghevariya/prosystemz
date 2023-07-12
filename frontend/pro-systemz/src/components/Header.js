@@ -43,7 +43,7 @@ const Header = ({ isLoggedIn, userType }) => {
             {isLoggedIn && userType == "Admin" && (
               <Nav.Item>
                 <Link className="nav-link" to="/customer-list">
-                  Customer List
+                  User List
                 </Link>
               </Nav.Item>
             )}

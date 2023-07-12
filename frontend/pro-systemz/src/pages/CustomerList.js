@@ -25,8 +25,12 @@ const CustomerList = ({ isLoggedIn }) => {
     <React.Fragment>
       <Container>
         <Card className="m-3">
+          <Card.Header>
+            <h3 className="text-center">User List</h3>
+          </Card.Header>
+
           <Card.Body>
-            <Table className="table text-nowrap mb-0 table-centered table-hover">
+            <Table className="table text-nowrap mb-0 table-centered table-hover m-1">
               <thead className="table-light">
                 <tr>
                   <th>Username</th>

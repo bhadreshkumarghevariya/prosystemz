@@ -22,6 +22,7 @@ const ProductListItem = (props) => {
           const cartId = response.data.createCart;
           Cookies.set("cartId", cartId);
           console.log("Cart created successfully!");
+          props.setProductAddedToBuild(true);
         })
         .catch((error) => {
           console.error("Error creating cart:", error);
@@ -32,6 +33,7 @@ const ProductListItem = (props) => {
         .then((response) => {
           // const cart = response.data.addProductToCart;
           console.log(response);
+          props.setProductAddedToBuild(true);
         })
         .catch((error) => {
           console.error("Error adding  creating cart:", error);
