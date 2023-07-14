@@ -11,6 +11,7 @@ import {
 import { useLogin } from "../hooks/useLogin";
 import { emailValidator, passwordValidator } from "../validations";
 import { useEffect } from "react";
+import { buttonStyle } from "../theme/styles";
 
 const { useNavigate } = require("react-router-dom");
 
@@ -119,6 +120,7 @@ const LoginPage = () => {
                   className="m-4"
                   type="submit"
                   disabled={loading}
+                  style={buttonStyle}
                 >
                   {loading ? "Logging in..." : "Login"}
                 </Button>

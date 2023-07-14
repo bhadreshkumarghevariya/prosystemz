@@ -6,10 +6,12 @@ import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import DetailsButton from "../DetailsButton";
 import SelectButton from "../SelectButton";
+import { useNavigate } from "react-router-dom";
 
 const ProductListItem = (props) => {
   const [createCart] = useMutation(CREATE_CART_MUTATION);
   const [addProductToCart] = useMutation(ADD_PRODUCT_TO_CART_MUTATION);
+  const navigate = useNavigate();
 
   const handleCreateCart = async (productId) => {
     let cartId = Cookies.get("cartId");
@@ -41,6 +43,11 @@ const ProductListItem = (props) => {
         });
     }
   };
+
+  const handleViewDetails = (productID) => {
+    console.log("View Details");
+    navigate("/product-details/" + productID);
+  };
   return (
     <tr>
       <td className="p-auto">
@@ -58,12 +65,11 @@ const ProductListItem = (props) => {
       <td>{props.productObject.productShortDescription}</td>
       <td>${props.productObject.price}</td>
       <td>
-        <Link
-          to={"/product-details/" + props.productObject.id}
-          style={{ textDecoration: "none" }}
-        >
-          <DetailsButton />
-        </Link>
+        {/* <Link to={"/product-details/" + props.productObject.id}> */}
+        <DetailsButton
+          onClick={() => handleViewDetails(props.productObject.id)}
+        />
+        {/* </Link> */}
       </td>
 
       {!props.selectBtnIsHide && (
