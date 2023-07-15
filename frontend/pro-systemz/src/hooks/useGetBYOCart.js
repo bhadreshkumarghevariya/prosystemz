@@ -1,17 +1,41 @@
 import { gql, useQuery } from "@apollo/client";
 
+// export const GET_CART_QUERY = gql`
+//   query GetCart($getCartId: ID) {
+//     getCart(id: $getCartId) {
+//       id
+//       price
+//       productName
+//       productShortDescription
+//       productType {
+//         id
+//         productTypeName
+//       }
+//       imageURL
+//     }
+//   }
+// `;
+
 export const GET_CART_QUERY = gql`
-  query GetCart($getCartId: ID) {
-    getCart(id: $getCartId) {
-      id
-      price
-      productName
-      productShortDescription
-      productType {
+  query GetCart($getCartId: ID, $userId: ID) {
+    getCart(id: $getCartId, userId: $userId) {
+      products {
+        imageURL
+        price
         id
-        productTypeName
+        productDetails
+        productShortDescription
+        productName
+        productType {
+          customFields
+          id
+          imageURL
+          productTypeName
+        }
       }
-      imageURL
+      id
+      user
+      cartName
     }
   }
 `;

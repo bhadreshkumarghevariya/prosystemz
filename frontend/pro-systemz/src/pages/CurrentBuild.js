@@ -10,7 +10,7 @@ const CurrentBuild = (props) => {
   const location = useLocation();
   const [cartId, setCartId] = useState(Cookies.get("cartId"));
 
-  const { error, data, loading, refetch } = useGetBYOCart(cartId);
+  const { error, data, loading, refetch } = useGetBYOCart(cartId, props.userId);
   useEffect(() => {
     refetch();
   }, [location]);
@@ -50,7 +50,7 @@ const CurrentBuild = (props) => {
               </thead>
               {isData}
               <tbody>
-                {data.getCart.map((product) => {
+                {data.getCart.products.map((product) => {
                   return (
                     <ProductListItem
                       key={product.id}

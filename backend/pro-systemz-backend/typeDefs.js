@@ -18,11 +18,6 @@ const typeDefs = gql`
     productDetails: JSON
   }
 
-  type Cart {
-    id: ID
-    products: [Product]
-  }
-
   type UserType {
     id: ID
     userTypeName: String
@@ -35,6 +30,13 @@ const typeDefs = gql`
     userType: UserType
   }
 
+  type Cart {
+    id: ID
+    products: [Product]
+    user: ID
+    cartName: String
+  }
+
   type AuthPayload {
     token: String!
     user: User!
@@ -42,7 +44,8 @@ const typeDefs = gql`
 
   type Query {
     getProductType: [ProductType]
-    getCart(id: ID): [Product]
+    getCart(id: ID, userId: ID): Cart
+    getAllCartsForUser(userId: ID): [Cart]
     getAllProducts: [Product]
     getProduct(id: ID): Product
     getProductsByType(productType: ID!): [Product]
@@ -77,8 +80,8 @@ const typeDefs = gql`
     ): ProductType
     createUserType(userTypeName: String): UserType
     createProduct(input: productInput): Product
-    createCart(productId: ID): ID
-    addProductToCart(CartId: ID, productId: ID): [Product]
+    createCart(productId: ID, userId: ID): ID
+    addProductToCart(CartId: ID, productId: ID, userId: ID): [Product]
     findExitingProductFromCart(CartId: ID, productId: ID): Product
     signup(
       username: String!
