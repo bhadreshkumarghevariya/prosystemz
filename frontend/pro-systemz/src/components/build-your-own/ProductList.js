@@ -50,6 +50,7 @@ const ProductList = (props) => {
                       key={product.id}
                       productAddedToBuild={productAddedToBuild}
                       setProductAddedToBuild={setProductAddedToBuild}
+                      userId={props.userId}
                     />
                   );
                 })}

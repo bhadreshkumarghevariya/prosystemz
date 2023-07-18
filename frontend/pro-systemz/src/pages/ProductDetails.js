@@ -57,11 +57,11 @@ const ProductDetails = (props) => {
 
                   <hr className="my-3" />
 
-                  <div class="mb-5">
-                    <h4 class="mb-1">
+                  <div className="mb-5">
+                    <h4 className="mb-1">
                       {/* $49.00{" "} */}
                       <span>$ 69.00</span>
-                      {/* <span class="text-warning">(45% OFF)</span> */}
+                      {/* <span className="text-warning">(45% OFF)</span> */}
                     </h4>
                     <span>inclusive of all taxes</span>
                   </div>

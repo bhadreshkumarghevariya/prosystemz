@@ -9,8 +9,9 @@ import { useLocation } from "react-router-dom";
 const CurrentBuild = (props) => {
   const location = useLocation();
   const [cartId, setCartId] = useState(Cookies.get("cartId"));
+  console.log(props.userId);
 
-  const { error, data, loading, refetch } = useGetBYOCart(cartId);
+  const { error, data, loading, refetch } = useGetBYOCart(cartId, props.userId);
   useEffect(() => {
     refetch();
   }, [location]);
@@ -36,7 +37,10 @@ const CurrentBuild = (props) => {
     <>
       <Container>
         <Card className="m-3">
-          <Card.Body>
+          <Card.Header>
+            <h3>Current Build</h3>
+          </Card.Header>
+          <Card.Body className="m-2">
             <Table className="table text-nowrap mb-0 table-centered table-hover">
               <thead>
                 <tr>
@@ -50,7 +54,7 @@ const CurrentBuild = (props) => {
               </thead>
               {isData}
               <tbody>
-                {data.getCart.map((product) => {
+                {data.getCart.products.map((product) => {
                   return (
                     <ProductListItem
                       key={product.id}
@@ -62,6 +66,7 @@ const CurrentBuild = (props) => {
               </tbody>
             </Table>
           </Card.Body>
+          <Card.Footer></Card.Footer>
         </Card>
       </Container>
     </>

@@ -29,6 +29,7 @@ function App() {
   console.log(data);
   console.log(data && data.getUserDetails.userType.userTypeName);
   // console.log(data.getUserDetails.userType.userTypeName);
+  const userId = data && data.getUserDetails.id;
 
   return (
     <div className="App">
@@ -42,11 +43,11 @@ function App() {
           <Route path="/build-your-own" element={<BuildYourOwnPCHome />} />
           <Route
             path="/product-list/:productTypeName"
-            element={<ProductList />}
+            element={<ProductList userId={userId} />}
           />
           <Route
             path="/current-build"
-            element={<CurrentBuild />}
+            element={<CurrentBuild userId={userId} />}
             key="current-build"
           />
           <Route

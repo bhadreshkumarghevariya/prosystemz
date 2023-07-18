@@ -23,14 +23,17 @@ const resolvers = {
     getProductsByType: async (_, { productType }) => {
       return await Product.find({ productType }).populate("productType");
     },
-    getCart: async (_, { id }) => {
-      const cart = await Cart.findById(id).populate({
+    getCart: async (_, { id, userId }) => {
+      if (!userId) {
+        throw new Error("You are not authenticated!");
+      }
+      const cart = await Cart.findOne({ _id: id, user: userId }).populate({
         path: "products",
         populate: {
           path: "productType",
         },
       });
-      return cart.products;
+      return cart;
     },
     getUserDetails: async (parent, args, context) => {
       console.log(parent);
@@ -59,6 +62,17 @@ const resolvers = {
     },
     getAllUserTypes: async () => {
       return await UserType.find();
+    },
+    getAllCartsForUser: async (_, { userId }) => {
+      console.log(userId);
+      const carts = await Cart.find({ user: userId }).populate({
+        path: "products",
+        populate: {
+          path: "productType",
+        },
+      });
+      console.log(carts);
+      return carts;
     },
   },
   Mutation: {
@@ -108,8 +122,12 @@ const resolvers = {
 
       return newProduct;
     },
-    createCart: async (_, { productId }) => {
-      const newCart = await Cart.create({ products: [productId] });
+    createCart: async (_, { productId, userId }) => {
+      const newCart = await Cart.create({
+        products: [productId],
+        user: userId,
+      });
+      console.log(newCart);
       return newCart.id;
     },
     addProductToCart: async (_, { CartId, productId }) => {
