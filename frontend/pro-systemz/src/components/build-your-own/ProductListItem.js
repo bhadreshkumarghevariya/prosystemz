@@ -13,8 +13,7 @@ const ProductListItem = (props) => {
   const [addProductToCart] = useMutation(ADD_PRODUCT_TO_CART_MUTATION);
 
   const userId = props.userId;
-
- 
+  const navigate = useNavigate();
 
   const handleCreateCart = async (productId) => {
     let cartId = Cookies.get("cartId");
