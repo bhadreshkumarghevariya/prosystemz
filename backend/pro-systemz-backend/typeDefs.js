@@ -35,6 +35,14 @@ const typeDefs = gql`
     products: [Product]
     user: ID
     cartName: String
+    isAddedtoShoppingCart: Boolean
+  }
+
+  type ShoppingCart {
+    id: ID
+    products: [Product]
+    carts: [Cart]
+    user: ID
   }
 
   type AuthPayload {
@@ -45,6 +53,7 @@ const typeDefs = gql`
   type Query {
     getProductType: [ProductType]
     getCart(id: ID, userId: ID): Cart
+    getCartNotAddedToShoppingCart(id: ID, userId: ID): Cart
     getAllCartsForUser(userId: ID): [Cart]
     getAllProducts: [Product]
     getProduct(id: ID): Product
@@ -53,6 +62,7 @@ const typeDefs = gql`
     getUserDetails: User
     getAllUsers: [User]
     getAllUserTypes: [UserType]
+    getShoppingCart(id: ID, userId: ID): ShoppingCart
   }
 
   scalar JSON
@@ -81,6 +91,14 @@ const typeDefs = gql`
     createUserType(userTypeName: String): UserType
     createProduct(input: productInput): Product
     createCart(productId: ID, userId: ID): ID
+    #shopping cart mutations
+    createShoppingCartWithCartId(cartId: ID, userId: ID): ID
+    createShoppingCartWithProductId(productId: ID, userId: ID): ID
+    addProductToShoppingCart(
+      ShoppingCartId: ID
+      productId: ID
+      userId: ID
+    ): [Product]
     addProductToCart(CartId: ID, productId: ID, userId: ID): [Product]
     findExitingProductFromCart(CartId: ID, productId: ID): Product
     signup(

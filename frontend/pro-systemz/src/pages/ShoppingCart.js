@@ -9,45 +9,36 @@ import AddBuildToCartButton from "../components/AddBuildToCartButton";
 import { useAddBuildToCart } from "../hooks/useAddBuildToCart";
 import { useMutation } from "@apollo/client";
 import { ADD_BUILD_TO_CART_MUTATION } from "../mutations/ADD_BUILD_TO_CART_MUTATION";
+import { useGetShoppingCart } from "../hooks/useGetShoppingCart";
+import CheckoutButton from "../components/CheckoutButton";
 
-const CurrentBuild = (props) => {
+const ShoppingCart = (props) => {
   const location = useLocation();
-  const [cartId, setCartId] = useState(Cookies.get("cartId"));
+  const [shoppingCartId, setShoppingCartId] = useState(
+    Cookies.get("shoppingCartId")
+  );
+  //   const [cartSubTotal, setCartSubTotal] = useState(0);
+  let cartSubTotal = 0;
+  const [productList, setProductList] = useState([]);
   const [createShoppingCartWithCartId] = useMutation(
     ADD_BUILD_TO_CART_MUTATION
   );
 
   console.log(props.userId);
 
-  const { error, data, loading, refetch } = useGetBYOCart(cartId, props.userId);
+  const { error, data, loading, refetch } = useGetShoppingCart(
+    shoppingCartId,
+    props.userId
+  );
   useEffect(() => {
     refetch();
   }, [location]);
 
-  if (cartId === undefined) {
+  if (shoppingCartId === undefined) {
     return (
       <h1>Sorry.... There is no product Available in your current build</h1>
     );
   }
-
-  const handleAddBuildToCart = () => {
-    console.log("add build to cart");
-    createShoppingCartWithCartId({
-      variables: { cartId, userId: props.userId },
-    })
-      .then((response) => {
-        console.log(response);
-        Cookies.set(
-          "shoppingCartId",
-          response.data.createShoppingCartWithCartId
-        );
-        console.log("Cart created successfully!");
-      })
-      .catch((error) => {
-        console.error("Error creating cart:", error);
-        return;
-      });
-  };
 
   if (loading) return <>loading....</>;
   if (error)
@@ -60,10 +51,15 @@ const CurrentBuild = (props) => {
       </>
     );
   if (data) {
-    console.log(data);
+    console.log(data.getShoppingCart);
+    console.log(
+      data.getShoppingCart.carts.map((cart) =>
+        cart.products.map((product) => product.productName)
+      )
+    );
   }
   let isData;
-  if (Object.keys(data.getCart).length === 0) {
+  if (Object.keys(data.getShoppingCart).length === 0) {
     isData = <h1>Sorry.... There is no product Available for this type</h1>;
   }
   return (
@@ -87,20 +83,45 @@ const CurrentBuild = (props) => {
               </thead>
               {isData}
               <tbody>
-                {data.getCart.products.map((product) => {
+                {data.getShoppingCart.carts.map((cart) => {
                   return (
-                    <ProductListItem
-                      key={product.id}
-                      productObject={product}
-                      selectBtnIsHide="true"
-                    />
+                    <>
+                      <tr>
+                        <td colSpan="6">
+                          <h5>
+                            {cart.cartName ? cart.cartName : "Personal Build"}
+                          </h5>
+                        </td>
+                      </tr>
+                      {cart.products.map((product) => {
+                        cartSubTotal = cartSubTotal + product.price;
+                        console.log(cartSubTotal);
+                        return (
+                          <ProductListItem
+                            key={product.id}
+                            productObject={product}
+                            selectBtnIsHide="true"
+                          />
+                        );
+                      })}
+                    </>
                   );
                 })}
               </tbody>
             </Table>
           </Card.Body>
+          <Card.Footer></Card.Footer>
+        </Card>
+        {/* Card To show cart details like subtotal no use of table*/}
+        <Card className="m-3">
+          <Card.Header>
+            <Card.Title>Details</Card.Title>
+          </Card.Header>
+          <Card.Body className="m-2">
+            <h6>Subtotal: ${cartSubTotal}</h6>
+          </Card.Body>
           <Card.Footer>
-            <AddBuildToCartButton onClick={handleAddBuildToCart} />
+            <CheckoutButton />
           </Card.Footer>
         </Card>
       </Container>
@@ -108,4 +129,4 @@ const CurrentBuild = (props) => {
   );
 };
 
-export default CurrentBuild;
+export default ShoppingCart;

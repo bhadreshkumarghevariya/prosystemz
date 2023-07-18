@@ -20,6 +20,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import EditUser from "./pages/EditUser";
+import ShoppingCart from "./pages/ShoppingCart";
 const PrivateRoute = ({ children, isLoggedIn, component }) => {
   return isLoggedIn ? component : <Navigate to="/login" />;
 };
@@ -91,6 +92,15 @@ function App() {
               <PrivateRoute
                 isLoggedIn={isLoggedIn}
                 component={<AddProductType />}
+              />
+            }
+          />
+          <Route
+            path="/shopping-cart"
+            element={
+              <PrivateRoute
+                isLoggedIn={isLoggedIn}
+                component={<ShoppingCart userId={userId} />}
               />
             }
           />

@@ -34630,3 +34630,8 @@ div.table-responsive>div.dataTables_wrapper>div.row {
   min-height: 150px;
   padding: 20px
 }
+
+table{
+  display: block;
+  overflow-x: auto;
+}

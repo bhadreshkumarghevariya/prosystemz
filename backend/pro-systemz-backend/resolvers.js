@@ -4,6 +4,7 @@ const ProductType = require("./models/ProductType.model");
 const Cart = require("./models/Cart.model");
 const User = require("./models/User.model");
 const UserType = require("./models/UserType.Model");
+const ShoppingCart = require("./models/ShoppingCart.model");
 const bcrypt = require("bcrypt");
 
 const { generateToken } = require("./utils/authUtils");
@@ -73,6 +74,50 @@ const resolvers = {
       });
       console.log(carts);
       return carts;
+    },
+    getShoppingCart: async (_, { id, userId }) => {
+      if (!userId) {
+        throw new Error("You are not authenticated!");
+      }
+      const shoppingCart = await ShoppingCart.findOne({
+        _id: id,
+        user: userId,
+      })
+        .populate({
+          path: "products",
+          populate: {
+            path: "productType",
+          },
+        })
+        .populate({
+          path: "carts",
+          populate: {
+            path: "products",
+            populate: {
+              path: "productType",
+            },
+          },
+        });
+      console.log(shoppingCart);
+      return shoppingCart;
+    },
+
+    //implementation of getCartNotAddedToShoppingCart(id: ID, userId: ID): Cart
+    getCartNotAddedToShoppingCart: async (_, { id, userId }) => {
+      if (!userId) {
+        throw new Error("You are not authenticated!");
+      }
+      const cart = await Cart.findOne({
+        _id: id,
+        user: userId,
+        isAddedtoShoppingCart: false,
+      }).populate({
+        path: "products",
+        populate: {
+          path: "productType",
+        },
+      });
+      return cart;
     },
   },
   Mutation: {
@@ -152,6 +197,64 @@ const resolvers = {
         cart.products.push(product);
         await cart.save();
         return cart.products;
+      }
+    },
+    /*
+    implementation of
+    #shopping cart mutations
+    createShoppingCartWithCartId(cartId: ID, userId: ID): ID
+    createShoppingCartWithProductId(productId: ID, userId: ID): ID
+    addProductToShoppingCart(
+      ShoppingCartId: ID
+      productId: ID
+      userId: ID
+    ): [Product]
+    */
+    createShoppingCartWithCartId: async (_, { cartId, userId }) => {
+      const newShoppingCart = await ShoppingCart.create({
+        carts: [cartId],
+        user: userId,
+      });
+      //update cart to isAddedtoShoppingCart: true
+      const cart = await Cart.findById(cartId);
+      cart.isAddedtoShoppingCart = true;
+      await cart.save();
+
+      console.log(newShoppingCart);
+      return newShoppingCart.id;
+    },
+    createShoppingCartWithProductId: async (_, { productId, userId }) => {
+      const newShoppingCart = await ShoppingCart.create({
+        products: [productId],
+        user: userId,
+      });
+      console.log(newShoppingCart);
+      return newShoppingCart.id;
+    },
+    addProductToShoppingCart: async (_, { ShoppingCartId, productId }) => {
+      const shoppingCart = await ShoppingCart.findById(ShoppingCartId).populate(
+        {
+          path: "products",
+          populate: {
+            path: "productType",
+          },
+        }
+      );
+
+      const product = await Product.findById(productId).populate("productType");
+
+      const existingProductIndex = shoppingCart.products.findIndex((p) =>
+        p.productType.equals(product.productType)
+      );
+
+      if (existingProductIndex !== -1) {
+        shoppingCart.products.splice(existingProductIndex, 1, product);
+        await shoppingCart.save();
+        return shoppingCart.products;
+      } else {
+        shoppingCart.products.push(product);
+        await shoppingCart.save();
+        return shoppingCart.products;
       }
     },
     findExitingProductFromCart: async (_, { cartId, productId }) => {

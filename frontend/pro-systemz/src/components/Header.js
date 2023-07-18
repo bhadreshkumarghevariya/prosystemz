@@ -81,6 +81,12 @@ const Header = ({ isLoggedIn, userType }) => {
                   Profile
                 </Link>
               </Nav.Item>
+              <Nav.Item>
+                <Link className="nav-link" to="/shopping-cart">
+                  Shopping Cart
+                </Link>
+              </Nav.Item>
+
               {userType == "Admin" && (
                 <Nav.Item>
                   <Link className="nav-link" to="/add-product-type">
