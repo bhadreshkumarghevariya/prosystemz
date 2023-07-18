@@ -1,10 +1,11 @@
-import { Container, Nav } from "react-bootstrap";
+import { Container, Nav, Image } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 import useLoggedInStatus from "../hooks/useLoggedInStatus";
 import { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_USER_DETAILS } from "../mutations/GET_USER_DETAILS";
+import logo from "../logo.png";
 
 const Header = ({ isLoggedIn, userType }) => {
   console.log(userType);
@@ -15,8 +16,13 @@ const Header = ({ isLoggedIn, userType }) => {
       <Navbar className="shadow " bg="light">
         <Container>
           <Navbar.Brand className="font-weight-bold">
-            <Link className="nav-link" to="/">
-              Pro Systemz
+            <Link className="nav-link m-auto p-auto" to="/">
+              <Image
+                src={logo}
+                height="25"
+                className="d-inline-block align-top m-auto"
+                alt="React Bootstrap logo"
+              />
             </Link>
           </Navbar.Brand>
           <Nav className="mr-auto">
