@@ -10,13 +10,14 @@ import SelectButton from "../SelectButton";
 const ProductListItem = (props) => {
   const [createCart] = useMutation(CREATE_CART_MUTATION);
   const [addProductToCart] = useMutation(ADD_PRODUCT_TO_CART_MUTATION);
+  const userId = props.userId;
 
   const handleCreateCart = async (productId) => {
     let cartId = Cookies.get("cartId");
 
     console.log(productId);
     if (!cartId) {
-      createCart({ variables: { productId } })
+      createCart({ variables: { productId, userId } })
         .then((response) => {
           // console.log(productId);
           const cartId = response.data.createCart;

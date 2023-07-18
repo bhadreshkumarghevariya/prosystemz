@@ -127,6 +127,7 @@ const resolvers = {
         products: [productId],
         user: userId,
       });
+      console.log(newCart);
       return newCart.id;
     },
     addProductToCart: async (_, { CartId, productId }) => {
