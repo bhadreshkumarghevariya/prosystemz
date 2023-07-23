@@ -17,7 +17,6 @@ import UserProfile from "./pages/UserProfile";
 import LogoutPage from "./pages/LogOut";
 import CustomerList from "./pages/CustomerList";
 import React from "react";
-import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import EditUser from "./pages/EditUser";
 import ShoppingCart from "./pages/ShoppingCart";

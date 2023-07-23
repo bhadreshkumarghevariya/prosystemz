@@ -34624,3 +34624,15 @@ div.table-responsive>div.dataTables_wrapper>div.row {
 
 
 
+.form-control:focus {
+  border-color: #b1ebd4 !important; /* Replace with your desired secondary color */
+  box-shadow: 0 0 0 0.25rem #dff7ee !important; /* Optional: Add a colored box shadow */
+  background-color: #fff !important; /* Optional: Add a colored background */
+}
+
+.form-select{
+  border-color: #b1ebd4 !important; /* Replace with your desired secondary color */
+  box-shadow: 0 0 0 0.25rem #dff7ee !important; /* Optional: Add a colored box shadow */
+  background-color: #fff !important; /* Optional: Add a colored background */
+
+}

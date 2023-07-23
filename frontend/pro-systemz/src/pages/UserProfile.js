@@ -4,6 +4,7 @@ import { GET_USER_DETAILS } from "../mutations/GET_USER_DETAILS";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
+import PrimaryButton from "../components/Buttons/PrimaryButton";
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -78,13 +79,21 @@ const UserProfile = () => {
                   </Col>
                 )}
                 <Col xs={6}>
-                  <Button
+                  <PrimaryButton
                     variant="primary"
                     className="mt-4"
                     onClick={handleEdit}
                   >
                     Edit Profile
-                  </Button>
+                  </PrimaryButton>
+
+                  {/* <Button
+                    variant="primary"
+                    className="mt-4"
+                    onClick={handleEdit}
+                  >
+                    Edit Profile
+                  </Button> */}
                 </Col>
               </Row>
             </Card.Body>

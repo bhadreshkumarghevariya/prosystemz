@@ -1,10 +1,10 @@
 import { Button } from "react-bootstrap";
-import { buttonStyle } from "../theme/styles";
+import { primaryButtonStyle } from "../theme/styles";
 
 const AddToBuildButton = ({ onClick }) => {
   return (
     <div className="d-grid mb-2 mb-md-0">
-      <Button style={buttonStyle} onClick={onClick}>
+      <Button style={primaryButtonStyle} onClick={onClick}>
         {/* <i className="fe fe-shopping-cart me-2"></i> */}
         <svg
           xmlns="http://www.w3.org/2000/svg"

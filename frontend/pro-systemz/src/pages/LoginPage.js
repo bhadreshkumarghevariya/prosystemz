@@ -11,7 +11,9 @@ import {
 import { useLogin } from "../hooks/useLogin";
 import { emailValidator, passwordValidator } from "../validations";
 import { useEffect } from "react";
-import { buttonStyle } from "../theme/styles";
+import { primaryButtonStyle } from "../theme/styles";
+import PrimaryButton from "../components/Buttons/PrimaryButton";
+import FormControl from "../components/FormControls/FormControl";
 
 const { useNavigate } = require("react-router-dom");
 
@@ -84,11 +86,13 @@ const LoginPage = () => {
             <Card style={{ width: "32rem" }} className="m-auto p-3">
               <Form onSubmit={handleLogin}>
                 <Form.Group controlId="email">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
+                  <FormControl
                     type="email"
+                    placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    label="Email"
+                    required
                   />
                   {emailValidator(email)}
                   {emailError && (
@@ -99,11 +103,13 @@ const LoginPage = () => {
                 </Form.Group>
 
                 <Form.Group controlId="password">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
+                  <FormControl
                     type="password"
+                    placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    label="Password"
+                    required
                   />
                   {passwordValidator(password)}
                   {passwordError && (
@@ -115,15 +121,9 @@ const LoginPage = () => {
                   )}
                 </Form.Group>
 
-                <Button
-                  variant="primary"
-                  className="m-4"
-                  type="submit"
-                  disabled={loading}
-                  style={buttonStyle}
-                >
+                <PrimaryButton type="submit" disabled={loading}>
                   {loading ? "Logging in..." : "Login"}
-                </Button>
+                </PrimaryButton>
               </Form>
             </Card>
           </Col>

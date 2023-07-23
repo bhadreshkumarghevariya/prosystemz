@@ -10,7 +10,7 @@ import { useAddBuildToCart } from "../hooks/useAddBuildToCart";
 import { useMutation } from "@apollo/client";
 import { ADD_BUILD_TO_CART_MUTATION } from "../mutations/ADD_BUILD_TO_CART_MUTATION";
 import { useGetShoppingCart } from "../hooks/useGetShoppingCart";
-import CheckoutButton from "../components/CheckoutButton";
+import PrimaryButton from "../components/Buttons/PrimaryButton";
 
 const ShoppingCart = (props) => {
   const location = useLocation();
@@ -121,7 +121,42 @@ const ShoppingCart = (props) => {
             <h6>Subtotal: ${cartSubTotal}</h6>
           </Card.Body>
           <Card.Footer>
-            <CheckoutButton />
+            {/* <PrimaryButton
+              onClick={() => {
+                Cookies.remove("shoppingCartId");
+                setShoppingCartId(undefined);
+              }}
+            >
+              Clear Cart
+            </PrimaryButton> */}
+            {/* <PrimaryButton
+              onClick={() => {
+                Cookies.remove("shoppingCartId");
+                setShoppingCartId(undefined);
+              }}
+            >
+              Update Cart
+            </PrimaryButton> */}
+
+            {/* <PrimaryButton
+              onClick={() => {
+                Cookies.remove("shoppingCartId");
+                setShoppingCartId(undefined);
+              }}
+            >
+              Continue Shopping
+            </PrimaryButton> */}
+            <PrimaryButton
+              onClick={() => {
+                Cookies.remove("shoppingCartId");
+                setShoppingCartId(undefined);
+              }}
+              className="d-grid mb-2 mb-md-0 float-end"
+            >
+              Proceed to Checkout
+            </PrimaryButton>
+
+            {/* <CheckoutButton /> */}
           </Card.Footer>
         </Card>
       </Container>

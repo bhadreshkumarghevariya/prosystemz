@@ -4,15 +4,14 @@ import Component from "../components/build-your-own/Component";
 import BuildYourOwnPCHome from "./build-your-own/BuildYourOwnPCHome";
 import { React } from "react";
 import { Link } from "react-router-dom";
+import PrimaryButton from "../components/Buttons/PrimaryButton";
 
 const Home = () => {
   return (
     <>
       <Container className="text-center mt-5">
         <Link className="nav-link" to="/build-your-own">
-          <Button className="button buttonPrimary">
-            Build Your Own Computer.
-          </Button>
+          <PrimaryButton>Build Your Own Computer.</PrimaryButton>
         </Link>
       </Container>
     </>

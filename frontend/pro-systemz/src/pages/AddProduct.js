@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import { useAddProduct } from "../hooks/useAddProduct";
 import { useGetProductType } from "../hooks/useGetProductType";
+import PrimaryButton from "../components/Buttons/PrimaryButton";
 import Upload from "../components/Upload";
 import Header from "../components/Header";
 
@@ -146,6 +147,7 @@ const AddProduct = () => {
                         onChange={(e) => handleProductTypeChange(e)}
                         required
                       >
+                        <option value="">Select Product Type</option>
                         {data?.getProductType.map((productType) => (
                           <option
                             key={productType.id}
@@ -229,15 +231,23 @@ const AddProduct = () => {
                   <Col></Col>
                 </Row>
               ))}
-              <Button variant="primary" className="m-2" type="submit">
+              <PrimaryButton
+                variant="primary"
+                className="m-2"
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? "Adding Product..." : "Add Product"}
+              </PrimaryButton>
+              {/* <Button variant="primary" className="m-2" type="submit">
                 Add Product
-              </Button>
+              </Button> */}
               <Alert
                 variant="success"
                 className="mt-5 col-4 m-auto"
                 show={success !== false}
               >
-                <p>Product Type Added Successfully</p>
+                <p>Product Added Successfully</p>
               </Alert>
               <Alert
                 variant="danger"

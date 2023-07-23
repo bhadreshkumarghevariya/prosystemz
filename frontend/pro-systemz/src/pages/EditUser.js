@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import { useGetUser } from "../hooks/useGetUser";
 import UserTypeSelect from "../components/UserTypeSelect";
+import PrimaryButton from "../components/Buttons/PrimaryButton";
 
 const EditUser = () => {
   const { userId } = useParams(); // Retrieve the userId from the URL params
@@ -72,7 +73,6 @@ const EditUser = () => {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required
                     placeholder="Enter email"
                   />
                 </FloatingLabel>
@@ -99,9 +99,18 @@ const EditUser = () => {
 
               <UserTypeSelect userType={userType} setUserType={setUserType} />
 
-              <Button type="submit" className="m-4">
+              <PrimaryButton
+                type="submit"
+                className="m-4"
+                disabled={loading}
+                loading={loading}
+              >
                 Update User
-              </Button>
+              </PrimaryButton>
+
+              {/* <Button type="submit" className="m-4">
+                Update User
+              </Button> */}
             </Form>
           </Card>
         </Col>

@@ -9,6 +9,7 @@ import AddBuildToCartButton from "../components/AddBuildToCartButton";
 import { useAddBuildToCart } from "../hooks/useAddBuildToCart";
 import { useMutation } from "@apollo/client";
 import { ADD_BUILD_TO_CART_MUTATION } from "../mutations/ADD_BUILD_TO_CART_MUTATION";
+import PrimaryButton from "../components/Buttons/PrimaryButton";
 
 const CurrentBuild = (props) => {
   const location = useLocation();
@@ -63,7 +64,7 @@ const CurrentBuild = (props) => {
     console.log(data);
   }
   let isData;
-  if (Object.keys(data.getCart).length === 0) {
+  if (data.getCart && Object.keys(data.getCart).length === 0) {
     isData = <h1>Sorry.... There is no product Available for this type</h1>;
   }
   return (
@@ -87,20 +88,39 @@ const CurrentBuild = (props) => {
               </thead>
               {isData}
               <tbody>
-                {data.getCart.products.map((product) => {
-                  return (
-                    <ProductListItem
-                      key={product.id}
-                      productObject={product}
-                      selectBtnIsHide="true"
-                    />
-                  );
-                })}
+                {data.getCart &&
+                  data.getCart.products.map((product) => {
+                    return (
+                      <ProductListItem
+                        key={product.id}
+                        productObject={product}
+                        selectBtnIsHide="true"
+                      />
+                    );
+                  })}
               </tbody>
             </Table>
           </Card.Body>
           <Card.Footer>
-            <AddBuildToCartButton onClick={handleAddBuildToCart} />
+            {/* <AddBuildToCartButton onClick={handleAddBuildToCart} /> */}
+            <PrimaryButton onClick={handleAddBuildToCart} className="float-end">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="feather feather-plus icon-xs mx-2"
+              >
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Add Build To Cart
+            </PrimaryButton>
           </Card.Footer>
         </Card>
       </Container>

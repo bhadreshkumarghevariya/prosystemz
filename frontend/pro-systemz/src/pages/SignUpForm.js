@@ -5,6 +5,8 @@ import { useSignup } from "../hooks/useSignup";
 
 import { useNavigate } from "react-router-dom";
 import { emailValidator, passwordValidator } from "../validations";
+import FormControl from "../components/FormControls/FormControl";
+import PrimaryButton from "../components/Buttons/PrimaryButton";
 
 const SignupForm = () => {
   const [username, setUsername] = useState("");
@@ -48,23 +50,42 @@ const SignupForm = () => {
           <Card style={{ width: "32rem" }} className="m-auto p-3">
             <Form onSubmit={handleSignup}>
               <Form.Group controlId="username">
-                <Form.Label>Username</Form.Label>
+                <FormControl
+                  controlId="username"
+                  label="Username"
+                  type="text"
+                  placeholder="Enter username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+                {/* <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
-                />
+                /> */}
               </Form.Group>
 
               <Form.Group controlId="email">
-                <Form.Label>Email</Form.Label>
+                <FormControl
+                  controlId="email"
+                  label="Email"
+                  type="email"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+
+                {/* <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                />
+                /> */}
                 {emailValidator(email)}
                 {emailError && (
                   <div className="alert alert-danger my-3" role="alert">
@@ -74,13 +95,23 @@ const SignupForm = () => {
               </Form.Group>
 
               <Form.Group controlId="password">
-                <Form.Label>Password</Form.Label>
+                <FormControl
+                  controlId="password"
+                  label="Password"
+                  type="password"
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+
+                {/* <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                />
+                /> */}
                 {passwordValidator(password)}
                 {passwordError && (
                   <div className="alert alert-danger my-3" role="alert">
@@ -90,9 +121,12 @@ const SignupForm = () => {
                 )}
               </Form.Group>
 
-              <Button type="submit" className="m-4" disabled={loading}>
+              {/* <Button type="submit" className="m-4" disabled={loading}>
                 Signup
-              </Button>
+              </Button> */}
+              <PrimaryButton type="submit" disabled={loading}>
+                Signup
+              </PrimaryButton>
 
               {error && (
                 <p>
