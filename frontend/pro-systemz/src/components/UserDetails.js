@@ -31,7 +31,7 @@ const UserDetails = () => {
       <Col>
         <Container>
           {user && (
-            <Card className="m-3">
+            <Card className="m-1">
               <Card.Header>
                 <h4 className="mb-0">User Details</h4>
               </Card.Header>
