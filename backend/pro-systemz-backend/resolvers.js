@@ -386,6 +386,19 @@ const resolvers = {
       // Return the Payment document
       return payment;
     },
+    createOrder: async (_, { input }) => {
+      const order = new Order({
+        user: input.userId,
+        checkout: input.checkoutId,
+        orderStatus: input.orderStatus,
+        orderDate: input.orderDate,
+        payment: input.paymentId,
+      });
+
+      await order.save();
+
+      return order;
+    },
   },
 };
 

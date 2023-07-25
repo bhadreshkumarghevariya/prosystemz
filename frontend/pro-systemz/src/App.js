@@ -22,6 +22,7 @@ import EditUser from "./pages/EditUser";
 import ShoppingCart from "./pages/ShoppingCart";
 import CheckOut from "./pages/Checkout";
 import Payment from "./pages/Payment";
+import MyOrders from "./pages/MyOrders";
 import { useGetBYOCart } from "./hooks/useGetBYOCart";
 const PrivateRoute = ({ children, isLoggedIn, component }) => {
   return isLoggedIn ? component : <Navigate to="/login" />;
@@ -132,6 +133,7 @@ function App() {
             element={<Payment userId={userId} />}
           />
           <Route path="/edit-user/:userId" element={<EditUser />} />
+          <Route path="/my-orders" element={<MyOrders userId={userId} />} />
           <Route path="/logout" element={<LogoutPage />} />
         </Routes>
       </Router>

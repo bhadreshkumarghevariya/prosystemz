@@ -57,6 +57,23 @@ const typeDefs = gql`
     userId: ID
   }
 
+  type Order {
+    id: ID
+    user: ID
+    checkout: ID
+    orderStatus: String
+    orderDate: String
+    payment: ID
+  }
+
+  input OrderInput {
+    userId: ID
+    checkoutId: ID
+    orderStatus: String
+    orderDate: String
+    paymentId: ID
+  }
+
   input AddressInput {
     addressLine1: String
     addressLine2: String
@@ -158,6 +175,7 @@ const typeDefs = gql`
       shoppingCartId: ID
     ): Checkout
     createPayment(input: PaymentInput): Payment
+    createOrder(input: OrderInput): Order
   }
 `;
 

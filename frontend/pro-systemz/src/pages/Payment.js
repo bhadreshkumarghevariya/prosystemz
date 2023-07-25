@@ -5,8 +5,11 @@ import { Form, Button, Container, Card } from "react-bootstrap";
 import FormControl from "../components/FormControls/FormControl";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import { useCreatePayment } from "../hooks/useCreatePayment";
+import { useCreateOrder } from "../hooks/useCreateOrder";
+import { useNavigate } from "react-router-dom";
 
 const Payment = (props) => {
+  const navigate = useNavigate();
   const { checkoutId } = useParams();
   console.log(checkoutId);
   const userId = props.userId;
@@ -15,6 +18,12 @@ const Payment = (props) => {
   const [cardCVV, setCardCVV] = useState("");
 
   const { createPayment, data, loading, error } = useCreatePayment();
+  const {
+    createOrder,
+    data: orderData,
+    loading: orderLoading,
+    error: orderError,
+  } = useCreateOrder();
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Here you would typically handle form submission, e.g., send data to server
@@ -29,6 +38,22 @@ const Payment = (props) => {
     try {
       const result = await createPayment({ variables: { input } });
       console.log(result);
+      const paymentId = result.data.createPayment.id;
+      const orderInput = {
+        userId,
+        checkoutId,
+        orderStatus: "PAID",
+        orderDate: new Date().toISOString(),
+        paymentId,
+      };
+      const orderResult = await createOrder({
+        variables: { input: orderInput },
+      });
+      console.log(orderResult);
+      const orderId = orderResult.data.createOrder.id;
+      // props.history.push(`/order/${orderId}`);
+      console.log("OrderId" + orderId);
+      orderId && navigate(`/my-orders`);
     } catch (error) {
       console.log(error);
     }
