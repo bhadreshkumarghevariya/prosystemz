@@ -1,29 +1,25 @@
 import { Container, Table, Card, Row, Col, Form } from "react-bootstrap";
-import Header from "../components/Header";
-import { useGetBYOCart } from "../hooks/useGetBYOCart";
+
 import Cookies from "js-cookie";
 import ProductListItem from "../components/build-your-own/ProductListItem";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import AddBuildToCartButton from "../components/AddBuildToCartButton";
-import { useAddBuildToCart } from "../hooks/useAddBuildToCart";
+
 import { useMutation } from "@apollo/client";
-import { ADD_BUILD_TO_CART_MUTATION } from "../mutations/ADD_BUILD_TO_CART_MUTATION";
+// import { ADD_BUILD_TO_CART_MUTATION } from "../mutations/ADD_BUILD_TO_CART_MUTATION";
 import { useGetShoppingCart } from "../hooks/useGetShoppingCart";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import { useNavigate } from "react-router-dom";
-import UserProfile from "./UserProfile";
+
 import UserDetails from "../components/UserDetails";
 import FormControl from "../components/FormControls/FormControl";
-import useCreateCheckout from "../hooks/useCreateChekout";
+
 import { CREATE_CHECKOUT_MUTATION } from "../mutations/CREATE_CHECKOUT_MUTATION";
 
 const ShoppingCart = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [shoppingCartId, setShoppingCartId] = useState(
-    Cookies.get("shoppingCartId")
-  );
+  const [shoppingCartId] = useState(Cookies.get("shoppingCartId"));
   const [addressLine1, setAddressLine1] = useState("");
   const [addressLine2, setAddressLine2] = useState("");
   const [city, setCity] = useState("");
@@ -32,16 +28,14 @@ const ShoppingCart = (props) => {
   const [country, setCountry] = useState("");
   //   const [cartSubTotal, setCartSubTotal] = useState(0);
   // let cartSubTotal = 0;
-  const [cartSubTotal, setCartSubTotal] = useState(0);
+  const [cartSubTotal] = useState(0);
   let tempCartSubTotal = 0;
-  const [productList, setProductList] = useState([]);
-  const [createShoppingCartWithCartId] = useMutation(
-    ADD_BUILD_TO_CART_MUTATION
+  // const [createShoppingCartWithCartId] = useMutation(
+  //   ADD_BUILD_TO_CART_MUTATION
+  // );
+  const [checkout, { data: checkoutData }] = useMutation(
+    CREATE_CHECKOUT_MUTATION
   );
-  const [
-    checkout,
-    { data: checkoutData, loading: checkoutLoading, error: checkoutError },
-  ] = useMutation(CREATE_CHECKOUT_MUTATION);
 
   console.log(props.userId);
 

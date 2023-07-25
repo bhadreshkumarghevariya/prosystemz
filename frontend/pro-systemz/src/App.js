@@ -1,6 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
-import { useNavigate } from "react-router-dom";
 import useLoggedInStatus from "./hooks/useLoggedInStatus";
 import { Navigate } from "react-router-dom";
 
@@ -16,14 +15,13 @@ import AddProductType from "./pages/AddProductType";
 import UserProfile from "./pages/UserProfile";
 import LogoutPage from "./pages/LogOut";
 import CustomerList from "./pages/CustomerList";
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "./components/Header";
 import EditUser from "./pages/EditUser";
 import ShoppingCart from "./pages/ShoppingCart";
 import CheckOut from "./pages/Checkout";
 import Payment from "./pages/Payment";
 import MyOrders from "./pages/MyOrders";
-import { useGetBYOCart } from "./hooks/useGetBYOCart";
 const PrivateRoute = ({ children, isLoggedIn, component }) => {
   return isLoggedIn ? component : <Navigate to="/login" />;
 };

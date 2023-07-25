@@ -1,10 +1,6 @@
 import { Container, Nav, Image } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
-import useLoggedInStatus from "../hooks/useLoggedInStatus";
-import { useEffect } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_USER_DETAILS } from "../mutations/GET_USER_DETAILS";
 import logo from "../logo.png";
 
 const Header = ({ isLoggedIn, userType }) => {
@@ -39,21 +35,21 @@ const Header = ({ isLoggedIn, userType }) => {
               </Nav.Item>
             )}
 
-            {isLoggedIn && userType == "Admin" && (
+            {isLoggedIn && userType === "Admin" && (
               <Nav.Item>
                 <Link className="nav-link" to="/add-product">
                   Add Product
                 </Link>
               </Nav.Item>
             )}
-            {isLoggedIn && userType == "Admin" && (
+            {isLoggedIn && userType === "Admin" && (
               <Nav.Item>
                 <Link className="nav-link" to="/customer-list">
                   User List
                 </Link>
               </Nav.Item>
             )}
-            {isLoggedIn && userType != "Admin" && (
+            {isLoggedIn && userType !== "Admin" && (
               <Nav.Item>
                 <Link className="nav-link" to="/my-orders">
                   My Orders
@@ -94,7 +90,7 @@ const Header = ({ isLoggedIn, userType }) => {
                 </Link>
               </Nav.Item>
 
-              {userType == "Admin" && (
+              {userType === "Admin" && (
                 <Nav.Item>
                   <Link className="nav-link" to="/add-product-type">
                     Add Product Type

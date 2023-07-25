@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { Form, Button, Container, Card } from "react-bootstrap";
+import { Form, Container, Card } from "react-bootstrap";
 import FormControl from "../components/FormControls/FormControl";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import { useCreatePayment } from "../hooks/useCreatePayment";
@@ -17,13 +17,8 @@ const Payment = (props) => {
   const [cardExpiry, setCardExpiry] = useState("");
   const [cardCVV, setCardCVV] = useState("");
 
-  const { createPayment, data, loading, error } = useCreatePayment();
-  const {
-    createOrder,
-    data: orderData,
-    loading: orderLoading,
-    error: orderError,
-  } = useCreateOrder();
+  const { createPayment, loading } = useCreatePayment();
+  const { createOrder } = useCreateOrder();
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Here you would typically handle form submission, e.g., send data to server
