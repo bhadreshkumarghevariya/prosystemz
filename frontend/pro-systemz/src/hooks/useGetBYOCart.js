@@ -17,8 +17,8 @@ import { gql, useQuery } from "@apollo/client";
 // `;
 
 export const GET_CART_QUERY = gql`
-  query GetCart($getCartId: ID, $userId: ID) {
-    getCart(id: $getCartId, userId: $userId) {
+  query GetCart($userId: ID) {
+    getCart(userId: $userId) {
       products {
         imageURL
         price
@@ -40,11 +40,11 @@ export const GET_CART_QUERY = gql`
   }
 `;
 
-export const useGetBYOCart = (getCartId, userId) => {
-  console.log(getCartId);
+export const useGetBYOCart = (userId) => {
+  // console.log(getCartId);
   console.log(userId);
   const { error, data, loading, refetch } = useQuery(GET_CART_QUERY, {
-    variables: { getCartId, userId },
+    variables: { userId },
   });
 
   return { error, loading, data, refetch };

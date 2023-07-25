@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_USER_DETAILS } from "../mutations/GET_USER_DETAILS";
+import Cookies from "js-cookie";
 
-const LogoutPage = () => {
+const LogoutPage = (props) => {
   const navigate = useNavigate();
   const { data, loading, error } = useQuery(GET_USER_DETAILS);
   useEffect(() => {
@@ -19,6 +20,9 @@ const LogoutPage = () => {
     console.log("Logged out successfully");
 
     navigate("/", { replace: true });
+
+    //clear  cartId cookies react
+    Cookies.remove("cartId");
 
     // Reload the entire application after a delay of 500 milliseconds
     setTimeout(() => {

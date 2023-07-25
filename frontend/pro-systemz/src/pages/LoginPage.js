@@ -14,6 +14,8 @@ import { useEffect } from "react";
 import { primaryButtonStyle } from "../theme/styles";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import FormControl from "../components/FormControls/FormControl";
+import { useGetBYOCart } from "../hooks/useGetBYOCart";
+import Cookies from "js-cookie";
 
 const { useNavigate } = require("react-router-dom");
 
@@ -26,6 +28,7 @@ const LoginPage = () => {
   const [passwordError, setPasswordError] = useState(false);
   const { login, loading, error } = useLogin();
   const navigate = useNavigate();
+  const [cartId, setCartId] = useState(Cookies.get("cartId"));
 
   useEffect(() => {
     setEmailError(emailValidator(email));
@@ -57,6 +60,12 @@ const LoginPage = () => {
         setEmail("");
         setPassword("");
         navigate("/", { replace: true });
+
+        //get cartId if exist and set it to cookies
+        // const { data, loading, error } = useGetBYOCart();
+        // if (data && data.getBYOCart && data.getBYOCart.id) {
+        //   Cookies.set("cartId", data.getBYOCart.id);
+        // }
 
         // Reload the entire application after a delay of 10 milliseconds
         setTimeout(() => {

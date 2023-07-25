@@ -12,6 +12,7 @@ const useLoggedInStatus = () => {
       console.log("setting is logged in to true");
       console.log(data.getUserDetails);
       setIsLoggedIn(true);
+      //if logged in set cartId to cookies
     }
     return () => {
       setIsLoggedIn(false);

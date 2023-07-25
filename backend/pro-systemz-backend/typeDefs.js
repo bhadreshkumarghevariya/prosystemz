@@ -52,7 +52,7 @@ const typeDefs = gql`
 
   type Query {
     getProductType: [ProductType]
-    getCart(id: ID, userId: ID): Cart
+    getCart(userId: ID): Cart
     getCartNotAddedToShoppingCart(id: ID, userId: ID): Cart
     getAllCartsForUser(userId: ID): [Cart]
     getAllProducts: [Product]
@@ -63,6 +63,7 @@ const typeDefs = gql`
     getAllUsers: [User]
     getAllUserTypes: [UserType]
     getShoppingCart(id: ID, userId: ID): ShoppingCart
+    getCartId(userId: ID): ID
   }
 
   scalar JSON

@@ -10,6 +10,7 @@ import { useAddBuildToCart } from "../hooks/useAddBuildToCart";
 import { useMutation } from "@apollo/client";
 import { ADD_BUILD_TO_CART_MUTATION } from "../mutations/ADD_BUILD_TO_CART_MUTATION";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
+// import { useGetCartId } from "../hooks/useGetCartId";
 
 const CurrentBuild = (props) => {
   const location = useLocation();
@@ -18,9 +19,13 @@ const CurrentBuild = (props) => {
     ADD_BUILD_TO_CART_MUTATION
   );
 
+  // const cartId = getCartId(props.userId);
+
+  // setCartId(useGetCartId(props.userId));
+
   console.log(props.userId);
 
-  const { error, data, loading, refetch } = useGetBYOCart(cartId, props.userId);
+  const { error, data, loading, refetch } = useGetBYOCart(props.userId);
   useEffect(() => {
     refetch();
   }, [location]);

@@ -24,11 +24,11 @@ const resolvers = {
     getProductsByType: async (_, { productType }) => {
       return await Product.find({ productType }).populate("productType");
     },
-    getCart: async (_, { id, userId }) => {
+    getCart: async (_, { userId }) => {
       if (!userId) {
         throw new Error("You are not authenticated!");
       }
-      const cart = await Cart.findOne({ _id: id, user: userId }).populate({
+      const cart = await Cart.findOne({ user: userId }).populate({
         path: "products",
         populate: {
           path: "productType",
@@ -118,6 +118,10 @@ const resolvers = {
         },
       });
       return cart;
+    },
+    getCartId: async (_, { userId }) => {
+      const cart = await Cart.findOne({ user: userId });
+      return cart.id;
     },
   },
   Mutation: {
