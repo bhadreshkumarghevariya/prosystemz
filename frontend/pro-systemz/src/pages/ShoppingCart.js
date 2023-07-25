@@ -108,25 +108,11 @@ const ShoppingCart = (props) => {
       },
     });
     console.log(result);
-
-    // const { data, error, loading } = await useCreateCheckout({
-    //   variables: {
-    //     userId: props.userId,
-    //     address: {
-    //       addressLine1: addressLine1,
-    //       addressLine2: addressLine2,
-    //       city: city,
-    //       state: state,
-    //       zipCode: zipCode,
-    //       country: country,
-    //     },
-    //     shoppingCartId: shoppingCartId,
-    //   },
-    // });
+    console.log(result.data.createCheckout.id);
+    result.data.createCheckout.id &&
+      navigate("/payment/" + result.data.createCheckout.id);
     if (checkoutData) {
       console.log(checkoutData);
-      // Cookies.remove("shoppingCartId");
-      // navigate("/checkout");
     }
     if (error) {
       console.log(error);

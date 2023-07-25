@@ -40,6 +40,23 @@ const typeDefs = gql`
     country: String
   }
 
+  type Payment {
+    id: ID
+    method: String
+    cardNumber: String
+    cardExpiry: String
+    cardCVV: String
+    user: User
+  }
+
+  input PaymentInput {
+    method: String
+    cardNumber: String
+    cardExpiry: String
+    cardCVV: String
+    userId: ID
+  }
+
   input AddressInput {
     addressLine1: String
     addressLine2: String
@@ -140,6 +157,7 @@ const typeDefs = gql`
       address: AddressInput
       shoppingCartId: ID
     ): Checkout
+    createPayment(input: PaymentInput): Payment
   }
 `;
 

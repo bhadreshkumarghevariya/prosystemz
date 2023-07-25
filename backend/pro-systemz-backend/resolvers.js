@@ -8,6 +8,7 @@ const ShoppingCart = require("./models/ShoppingCart.model");
 const Checkout = require("./models/Checkout.model");
 // const Address = require("./models/Address.model");
 const Order = require("./models/Order.model");
+const Payment = require("./models/Payment.model");
 
 const bcrypt = require("bcrypt");
 
@@ -356,6 +357,34 @@ const resolvers = {
       console.log(checkout);
       // Return the Checkout document
       return checkout;
+    },
+
+    createPayment: async (_, { input }) => {
+      // Retrieve the User from the database
+      const user = await User.findById(input.userId);
+
+      // Check if user exist
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      // Create a new Payment document
+      const payment = new Payment({
+        method: input.method,
+        cardNumber: input.cardNumber,
+        cardExpiry: input.cardExpiry,
+        cardCVV: input.cardCVV,
+        user: user._id,
+      });
+
+      // Save the Payment document to the database
+      await payment.save();
+
+      // Populate user field for returning the payment
+      await payment.populate("user");
+
+      // Return the Payment document
+      return payment;
     },
   },
 };
