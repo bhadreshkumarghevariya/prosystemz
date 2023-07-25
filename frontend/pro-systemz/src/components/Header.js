@@ -53,6 +53,13 @@ const Header = ({ isLoggedIn, userType }) => {
                 </Link>
               </Nav.Item>
             )}
+            {isLoggedIn && userType != "Admin" && (
+              <Nav.Item>
+                <Link className="nav-link" to="/my-orders">
+                  My Orders
+                </Link>
+              </Nav.Item>
+            )}
           </Nav>
 
           {!isLoggedIn ? (

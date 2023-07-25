@@ -59,11 +59,11 @@ const typeDefs = gql`
 
   type Order {
     id: ID
-    user: ID
-    checkout: ID
+    user: User
+    checkout: Checkout
     orderStatus: String
     orderDate: String
-    payment: ID
+    payment: Payment
   }
 
   input OrderInput {
@@ -124,6 +124,7 @@ const typeDefs = gql`
     getAllUserTypes: [UserType]
     getShoppingCart(id: ID, userId: ID): ShoppingCart
     getCartId(userId: ID): ID
+    getAllOrdersForUser(userId: ID!): [Order]
   }
 
   scalar JSON

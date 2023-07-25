@@ -128,6 +128,13 @@ const resolvers = {
       const cart = await Cart.findOne({ user: userId });
       return cart.id;
     },
+    getAllOrdersForUser: async (_, { userId }) => {
+      const orders = await Order.find({ user: userId })
+        .populate("checkout")
+        .populate("payment")
+        .populate("user");
+      return orders;
+    },
   },
   Mutation: {
     createUserType: async (_, { userTypeName }) => {

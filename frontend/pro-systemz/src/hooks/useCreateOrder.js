@@ -5,11 +5,8 @@ export const CREATE_ORDER_MUTATION = gql`
   mutation CreateOrder($input: OrderInput) {
     createOrder(input: $input) {
       id
-      user
-      checkout
       orderStatus
       orderDate
-      payment
     }
   }
 `;
