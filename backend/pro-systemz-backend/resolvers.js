@@ -5,6 +5,10 @@ const Cart = require("./models/Cart.model");
 const User = require("./models/User.model");
 const UserType = require("./models/UserType.Model");
 const ShoppingCart = require("./models/ShoppingCart.model");
+const Checkout = require("./models/Checkout.model");
+// const Address = require("./models/Address.model");
+const Order = require("./models/Order.model");
+
 const bcrypt = require("bcrypt");
 
 const { generateToken } = require("./utils/authUtils");
@@ -325,6 +329,33 @@ const resolvers = {
       const token = generateToken(user);
 
       return { token, user };
+    },
+
+    createCheckout: async (_, { userId, address, shoppingCartId }) => {
+      // Retrieve the User and ShoppingCart from the database
+      const user = await User.findById(userId);
+      const shoppingCart = await ShoppingCart.findById(shoppingCartId);
+
+      // Check if user and shopping cart exist
+      if (!user || !shoppingCart) {
+        throw new Error("User or ShoppingCart not found");
+      }
+
+      // Create a new Checkout document
+      const checkout = new Checkout({
+        user: user._id,
+        address: address,
+        shoppingCart: shoppingCartId,
+      });
+
+      // Save the Checkout document to the database
+      await checkout.save().then((checkout) => {
+        return checkout;
+      });
+
+      console.log(checkout);
+      // Return the Checkout document
+      return checkout;
     },
   },
 };

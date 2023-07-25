@@ -23,6 +23,32 @@ const typeDefs = gql`
     userTypeName: String
   }
 
+  type Checkout {
+    id: ID
+    user: ID
+    address: Address
+    shoppingCart: ID
+  }
+
+  type Address {
+    id: ID
+    addressLine1: String
+    addressLine2: String
+    city: String
+    state: String
+    zipCode: String
+    country: String
+  }
+
+  input AddressInput {
+    addressLine1: String
+    addressLine2: String
+    city: String
+    state: String
+    zipCode: String
+    country: String
+  }
+
   type User {
     id: ID!
     username: String!
@@ -109,6 +135,11 @@ const typeDefs = gql`
       userType: ID
     ): AuthPayload
     login(email: String!, password: String!): AuthPayload
+    createCheckout(
+      userId: ID
+      address: AddressInput
+      shoppingCartId: ID
+    ): Checkout
   }
 `;
 

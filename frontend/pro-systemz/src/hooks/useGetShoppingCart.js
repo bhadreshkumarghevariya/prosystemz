@@ -39,6 +39,7 @@ export const useGetShoppingCart = (getShoppingCartId, userId) => {
   const { error, data, loading, refetch } = useQuery(GET_SHOPPING_CART_QUERY, {
     variables: { getShoppingCartId, userId },
   });
+  console.log(data);
 
   return { error, loading, data, refetch };
 };

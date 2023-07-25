@@ -20,6 +20,7 @@ import React, { useEffect } from "react";
 import Header from "./components/Header";
 import EditUser from "./pages/EditUser";
 import ShoppingCart from "./pages/ShoppingCart";
+import CheckOut from "./pages/Checkout";
 import { useGetBYOCart } from "./hooks/useGetBYOCart";
 const PrivateRoute = ({ children, isLoggedIn, component }) => {
   return isLoggedIn ? component : <Navigate to="/login" />;
@@ -113,6 +114,15 @@ function App() {
               <PrivateRoute
                 isLoggedIn={isLoggedIn}
                 component={<ShoppingCart userId={userId} />}
+              />
+            }
+          />
+          <Route
+            path="checkout"
+            element={
+              <PrivateRoute
+                isLoggedIn={isLoggedIn}
+                component={<CheckOut userId={userId} />}
               />
             }
           />

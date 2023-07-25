@@ -11,6 +11,12 @@ import { useNavigate } from "react-router-dom";
 const ProductListItem = (props) => {
   const [createCart] = useMutation(CREATE_CART_MUTATION);
   const [addProductToCart] = useMutation(ADD_PRODUCT_TO_CART_MUTATION);
+  let showProductDetails = true;
+  let showProductType = true;
+
+  props.showProductDetails && (showProductDetails = props.showProductDetails);
+  props.showProductType && (showProductType = props.showProductType);
+  console.log(showProductDetails);
 
   const userId = props.userId;
   const navigate = useNavigate();
@@ -63,8 +69,18 @@ const ProductListItem = (props) => {
         />
       </td>
       <td>{props.productObject.productName}</td>
-      <td>{props.productObject.productType.productTypeName}</td>
-      <td>{props.productObject.productShortDescription}</td>
+      {showProductType === true ? (
+        <td>{props.productObject.productType.productTypeName}</td>
+      ) : (
+        <></>
+      )}
+
+      {showProductDetails === true ? (
+        <td>{props.productObject.productShortDescription}</td>
+      ) : (
+        <></>
+      )}
+
       <td>${props.productObject.price}</td>
       <td>
         {/* <Link to={"/product-details/" + props.productObject.id}> */}
