@@ -4,7 +4,7 @@ import { useGetOrderList } from "../hooks/useGetOrderList";
 import { Table } from "react-bootstrap";
 const MyOrders = (props) => {
   const userId = props.userId;
-  console.log(userId);
+
   const { loading, error, data } = useGetOrderList(userId);
 
   if (loading) return "Loading...";

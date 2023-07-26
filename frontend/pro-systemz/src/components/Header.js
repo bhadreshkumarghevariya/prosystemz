@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 import logo from "../logo.png";
 
 const Header = ({ isLoggedIn, userType }) => {
-  console.log(userType);
-  console.log(isLoggedIn);
-
   return (
     <>
       <Navbar className="shadow " bg="light">

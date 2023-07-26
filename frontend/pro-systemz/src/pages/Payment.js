@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 const Payment = (props) => {
   const navigate = useNavigate();
   const { checkoutId } = useParams();
-  console.log(checkoutId);
+
   const userId = props.userId;
   const [cardNumber, setCardNumber] = useState("");
   const [cardExpiry, setCardExpiry] = useState("");
@@ -22,7 +22,7 @@ const Payment = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Here you would typically handle form submission, e.g., send data to server
-    console.log({ cardNumber, cardExpiry, cardCVV });
+
     const input = {
       cardNumber,
       cardExpiry,
@@ -32,7 +32,7 @@ const Payment = (props) => {
 
     try {
       const result = await createPayment({ variables: { input } });
-      console.log(result);
+
       const paymentId = result.data.createPayment.id;
       const orderInput = {
         userId,
@@ -44,14 +44,11 @@ const Payment = (props) => {
       const orderResult = await createOrder({
         variables: { input: orderInput },
       });
-      console.log(orderResult);
+
       const orderId = orderResult.data.createOrder.id;
-      // props.history.push(`/order/${orderId}`);
-      console.log("OrderId" + orderId);
+
       orderId && navigate(`/my-orders`);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (

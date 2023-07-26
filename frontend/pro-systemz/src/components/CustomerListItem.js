@@ -7,13 +7,12 @@ const CustomerListItem = ({ user }) => {
   const navigate = useNavigate();
   const handleEdit = (props) => {
     // Handle edit button click with user details
-    console.log("Edit clicked", user);
+
     navigate(`/edit-user/${user.id}`);
   };
 
   const handleDelete = () => {
     // Handle delete button click with user details
-    console.log("Delete clicked", user);
   };
   return (
     <tr key={user.id}>

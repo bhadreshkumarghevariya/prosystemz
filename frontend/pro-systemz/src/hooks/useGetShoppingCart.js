@@ -34,12 +34,9 @@ export const GET_SHOPPING_CART_QUERY = gql`
 `;
 
 export const useGetShoppingCart = (getShoppingCartId, userId) => {
-  console.log(getShoppingCartId);
-  console.log(userId);
   const { error, data, loading, refetch } = useQuery(GET_SHOPPING_CART_QUERY, {
     variables: { getShoppingCartId, userId },
   });
-  console.log(data);
 
   return { error, loading, data, refetch };
 };

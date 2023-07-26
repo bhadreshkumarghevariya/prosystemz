@@ -19,12 +19,6 @@ const CurrentBuild = (props) => {
     ADD_BUILD_TO_CART_MUTATION
   );
 
-  // const cartId = getCartId(props.userId);
-
-  // setCartId(useGetCartId(props.userId));
-
-  console.log(props.userId);
-
   const { error, data, loading, refetch } = useGetBYOCart(props.userId);
   useEffect(() => {
     refetch();
@@ -37,17 +31,14 @@ const CurrentBuild = (props) => {
   }
 
   const handleAddBuildToCart = () => {
-    console.log("add build to cart");
     createShoppingCartWithCartId({
       variables: { cartId, userId: props.userId },
     })
       .then((response) => {
-        console.log(response);
         Cookies.set(
           "shoppingCartId",
           response.data.createShoppingCartWithCartId
         );
-        console.log("Cart created successfully!");
       })
       .catch((error) => {
         console.error("Error creating cart:", error);
@@ -65,9 +56,7 @@ const CurrentBuild = (props) => {
         })}
       </>
     );
-  if (data) {
-    console.log(data);
-  }
+
   let isData;
   if (data.getCart && Object.keys(data.getCart).length === 0) {
     isData = <h1>Sorry.... There is no product Available for this type</h1>;

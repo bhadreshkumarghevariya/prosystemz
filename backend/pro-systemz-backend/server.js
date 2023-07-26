@@ -34,7 +34,6 @@ async function startServer() {
     },
   });
   app.post("/upload", upload.single("file"), (req, res) => {
-    console.log(req.file);
     res.json({ file: req.file });
   });
 
@@ -55,8 +54,6 @@ async function startServer() {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   });
-
-  console.log("Mongoose Connected...");
 
   app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 

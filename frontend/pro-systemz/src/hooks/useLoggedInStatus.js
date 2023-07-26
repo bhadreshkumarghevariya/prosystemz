@@ -7,10 +7,7 @@ const useLoggedInStatus = () => {
   const { data, loading, error } = useQuery(GET_USER_DETAILS);
 
   useEffect(() => {
-    console.log(data);
     if (data && data.getUserDetails) {
-      console.log("setting is logged in to true");
-      console.log(data.getUserDetails);
       setIsLoggedIn(true);
       //if logged in set cartId to cookies
     }

@@ -16,7 +16,6 @@ const ProductListItem = (props) => {
 
   props.showProductDetails && (showProductDetails = props.showProductDetails);
   props.showProductType && (showProductType = props.showProductType);
-  console.log(showProductDetails);
 
   const userId = props.userId;
   const navigate = useNavigate();
@@ -24,14 +23,11 @@ const ProductListItem = (props) => {
   const handleCreateCart = async (productId) => {
     let cartId = Cookies.get("cartId");
 
-    console.log(productId);
     if (!cartId) {
       createCart({ variables: { productId, userId } })
         .then((response) => {
-          // console.log(productId);
           const cartId = response.data.createCart;
           Cookies.set("cartId", cartId);
-          console.log("Cart created successfully!");
           props.setProductAddedToBuild(true);
         })
         .catch((error) => {
@@ -41,8 +37,6 @@ const ProductListItem = (props) => {
     } else {
       addProductToCart({ variables: { cartId, productId } })
         .then((response) => {
-          // const cart = response.data.addProductToCart;
-          console.log(response);
           props.setProductAddedToBuild(true);
         })
         .catch((error) => {
@@ -53,7 +47,6 @@ const ProductListItem = (props) => {
   };
 
   const handleViewDetails = (productID) => {
-    console.log("View Details");
     navigate("/product-details/" + productID);
   };
   return (

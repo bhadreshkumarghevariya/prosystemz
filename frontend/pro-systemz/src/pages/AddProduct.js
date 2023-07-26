@@ -38,8 +38,6 @@ const AddProduct = () => {
 
     setCustomFields(selectedProductType?.customFields);
     setProductDetails([]);
-
-    console.log(data);
   };
 
   const handleFileChange = (e) => {
@@ -55,7 +53,6 @@ const AddProduct = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.file.path);
           setImageURL("http://localhost:4000/" + data.file.path);
           // return data.file.path;
         })
@@ -76,9 +73,9 @@ const AddProduct = () => {
         imageURL,
         productDetails,
       };
-      console.log(input);
+
       const response = await addProduct(input);
-      console.log(response);
+
       setProductName("");
       setProductShortDescription("");
       setProductType("");

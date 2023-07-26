@@ -22,7 +22,6 @@ const ProductDetails = (props) => {
 
   let isData;
   if (Object.keys(data.getProduct)) {
-    console.log(data.getProduct);
     isData = <h1>Sorry.... There is no product Available for this type</h1>;
   }
 

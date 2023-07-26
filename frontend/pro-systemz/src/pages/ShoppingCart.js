@@ -37,8 +37,6 @@ const ShoppingCart = (props) => {
     CREATE_CHECKOUT_MUTATION
   );
 
-  console.log(props.userId);
-
   const { error, data, loading, refetch } = useGetShoppingCart(
     shoppingCartId,
     props.userId
@@ -63,14 +61,7 @@ const ShoppingCart = (props) => {
         })}
       </>
     );
-  if (data) {
-    console.log(data.getShoppingCart);
-    console.log(
-      data.getShoppingCart.carts.map((cart) =>
-        cart.products.map((product) => product.productName)
-      )
-    );
-  }
+
   let isData;
   if (Object.keys(data.getShoppingCart).length === 0) {
     isData = <h1>Sorry.... There is no product Available for this type</h1>;
@@ -78,15 +69,6 @@ const ShoppingCart = (props) => {
 
   const handleCheckout = async (e) => {
     e.preventDefault();
-    console.log("checkout");
-    console.log(addressLine1);
-    console.log(addressLine2);
-    console.log(city);
-    console.log(state);
-    console.log(zipCode);
-    console.log(country);
-    console.log(shoppingCartId);
-    console.log(props.userId);
     const result = await checkout({
       variables: {
         userId: props.userId,
@@ -101,16 +83,8 @@ const ShoppingCart = (props) => {
         shoppingCartId: shoppingCartId,
       },
     });
-    console.log(result);
-    console.log(result.data.createCheckout.id);
     result.data.createCheckout.id &&
       navigate("/payment/" + result.data.createCheckout.id);
-    if (checkoutData) {
-      console.log(checkoutData);
-    }
-    if (error) {
-      console.log(error);
-    }
   };
   return (
     <>
@@ -146,7 +120,7 @@ const ShoppingCart = (props) => {
                           </tr>
                           {cart.products.map((product) => {
                             tempCartSubTotal = tempCartSubTotal + product.price;
-                            console.log(cartSubTotal);
+
                             return (
                               <ProductListItem
                                 key={product.id}

@@ -53,7 +53,7 @@ const LoginPage = () => {
         setError(errorMessage);
       } else {
         // Login successful, perform any necessary actions (e.g., redirect to dashboard)
-        console.log(token);
+
         localStorage.setItem("token", token);
         setError("Login Successfull");
         // Clear form fields
@@ -75,7 +75,6 @@ const LoginPage = () => {
     } catch (error) {
       // Login failed, display error message
       setError(error.message);
-      console.log(error.message);
     }
   };
 

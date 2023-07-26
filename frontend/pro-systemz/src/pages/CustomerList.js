@@ -20,7 +20,7 @@ const CustomerList = ({ isLoggedIn }) => {
   if (Object.keys(data.getAllUsers).length === 0) {
     isData = <h1>Sorry.... There is no product Available for this type</h1>;
   }
-  console.log(data.getAllUsers);
+
   return (
     <React.Fragment>
       <Container>

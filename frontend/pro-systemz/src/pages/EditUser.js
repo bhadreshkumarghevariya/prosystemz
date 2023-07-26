@@ -28,7 +28,6 @@ const EditUser = () => {
       setUsername(data.getUser.username);
       setEmail(data.getUser.email);
       data.getUser.userType && setUserType(data.getUser.userType.id);
-      data.getUser.userType && console.log(data.getUser.userType.id);
     }
   }, [data, error, loading]);
 

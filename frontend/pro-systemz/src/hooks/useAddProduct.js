@@ -22,7 +22,6 @@ export const useAddProduct = () => {
 
   const handleAddProduct = async (input) => {
     try {
-      console.log(input);
       const response = await addProduct({
         variables: {
           input,

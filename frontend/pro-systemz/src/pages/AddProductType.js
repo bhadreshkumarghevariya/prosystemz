@@ -38,13 +38,10 @@ const AddProductType = ({ onSubmit }) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.file.path);
           setImageURL("http://localhost:4000/" + data.file.path);
           // return data.file.path;
         })
-        .catch((error) => {
-          console.error(error);
-        });
+        .catch((error) => {});
     }
   };
 
@@ -63,11 +60,10 @@ const AddProductType = ({ onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(productTypeName);
       const productType = {
         productTypeName,
       };
-      console.log(customFields);
+
       const response = await createProductType({
         variables: {
           productType,
@@ -75,7 +71,7 @@ const AddProductType = ({ onSubmit }) => {
           imageURL,
         },
       });
-      console.log(response);
+
       setProductTypeName("");
       setCustomFields([]);
       setSuccess(true);
@@ -83,7 +79,6 @@ const AddProductType = ({ onSubmit }) => {
     } catch (error) {
       setError(error);
       setSuccess(false);
-      console.log(error);
     }
   };
 

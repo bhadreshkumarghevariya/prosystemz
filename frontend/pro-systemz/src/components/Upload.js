@@ -12,12 +12,9 @@ const Upload = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.file.path);
           return data.file.path;
         })
-        .catch((error) => {
-          console.error(error);
-        });
+        .catch((error) => {});
     }
   };
 

@@ -28,19 +28,8 @@ const PrivateRoute = ({ children, isLoggedIn, component }) => {
 
 function App() {
   const { isLoggedIn, data } = useLoggedInStatus();
-  console.log(data);
-  console.log(data && data.getUserDetails.userType.userTypeName);
-  // console.log(data.getUserDetails.userType.userTypeName);
-  const userId = data && data.getUserDetails.id;
-  console.log("Login status" + isLoggedIn);
 
-  //useEffect to set the cartId in cookies
-  // useEffect(() => {
-  //   if (data && data.getUserDetails && data.getUserDetails.id) {
-  //     const { data } = useGetBYOCart(data.getUserDetails.id);
-  //     console.log(data);
-  //   }
-  // }, [isLoggedIn]);
+  const userId = data && data.getUserDetails.id;
 
   return (
     <div className="App">

@@ -17,7 +17,6 @@ const GET_PRODUCT_LIST_BY_PRODUCT_TYPE = gql`
 `;
 
 export const useProductList = (productType) => {
-  console.log(productType);
   const { error, data, loading } = useQuery(GET_PRODUCT_LIST_BY_PRODUCT_TYPE, {
     variables: { productType },
   });

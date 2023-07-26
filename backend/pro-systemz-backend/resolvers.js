@@ -42,21 +42,16 @@ const resolvers = {
       return cart;
     },
     getUserDetails: async (parent, args, context) => {
-      console.log(parent);
-      console.log(args);
-      console.log(context);
       const req = context.req;
-      console.log(req);
       const token = context.token;
       if (!token) {
         throw new Error("You are not authenticated!");
       } else {
         const decodedToken = jwt.verify(token, "your-secret-key");
-        console.log(decodedToken);
 
         const userId = decodedToken.userId;
         const user = await User.findById(userId).populate("userType");
-        console.log(user);
+
         return user;
       }
     },
@@ -70,14 +65,13 @@ const resolvers = {
       return await UserType.find();
     },
     getAllCartsForUser: async (_, { userId }) => {
-      console.log(userId);
       const carts = await Cart.find({ user: userId }).populate({
         path: "products",
         populate: {
           path: "productType",
         },
       });
-      console.log(carts);
+
       return carts;
     },
     getShoppingCart: async (_, { id, userId }) => {
@@ -103,7 +97,7 @@ const resolvers = {
             },
           },
         });
-      console.log(shoppingCart);
+
       return shoppingCart;
     },
 
@@ -148,13 +142,13 @@ const resolvers = {
       const { productTypeName } = args.productType;
       const { customFields } = args;
       const { imageURL } = args;
-      console.log(customFields);
+
       const productType = new ProductType({
         productTypeName,
         customFields,
         imageURL,
       });
-      console.log(productType);
+
       await productType.save();
       return productType;
     },
@@ -188,7 +182,7 @@ const resolvers = {
         products: [productId],
         user: userId,
       });
-      console.log(newCart);
+
       return newCart.id;
     },
     addProductToCart: async (_, { CartId, productId }) => {
@@ -236,7 +230,6 @@ const resolvers = {
       cart.isAddedtoShoppingCart = true;
       await cart.save();
 
-      console.log(newShoppingCart);
       return newShoppingCart.id;
     },
     createShoppingCartWithProductId: async (_, { productId, userId }) => {
@@ -244,7 +237,7 @@ const resolvers = {
         products: [productId],
         user: userId,
       });
-      console.log(newShoppingCart);
+
       return newShoppingCart.id;
     },
     addProductToShoppingCart: async (_, { ShoppingCartId, productId }) => {
@@ -361,7 +354,6 @@ const resolvers = {
         return checkout;
       });
 
-      console.log(checkout);
       // Return the Checkout document
       return checkout;
     },

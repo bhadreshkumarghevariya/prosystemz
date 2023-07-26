@@ -14,10 +14,6 @@ const LogoutPage = (props) => {
   const handleLogout = () => {
     // Clear user's login status (e.g., remove token from localStorage)
     localStorage.removeItem("token");
-    console.log(data);
-
-    // Optional: Display a message indicating successful logout
-    console.log("Logged out successfully");
 
     navigate("/", { replace: true });
 

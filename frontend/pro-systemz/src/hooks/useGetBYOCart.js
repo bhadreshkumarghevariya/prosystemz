@@ -41,8 +41,6 @@ export const GET_CART_QUERY = gql`
 `;
 
 export const useGetBYOCart = (userId) => {
-  // console.log(getCartId);
-  console.log(userId);
   const { error, data, loading, refetch } = useQuery(GET_CART_QUERY, {
     variables: { userId },
   });

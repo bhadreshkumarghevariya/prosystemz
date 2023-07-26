@@ -21,7 +21,6 @@ export const useLogin = () => {
       const response = await login({
         variables: { email, password },
       });
-      console.log(response);
       return response.data.login;
     } catch (error) {
       throw new Error(error.message);

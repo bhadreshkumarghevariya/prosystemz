@@ -5,7 +5,7 @@ import Component from "../../components/build-your-own/Component";
 
 const BuildYourOwnPCHome = () => {
   const { error, data, loading } = useProductType();
-  console.log(data);
+
   if (loading) return <>loading....</>;
   if (error)
     return (

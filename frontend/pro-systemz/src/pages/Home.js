@@ -9,11 +9,9 @@ import { useGetBYOCart } from "../hooks/useGetBYOCart";
 import Cookies from "js-cookie";
 
 const Home = (props) => {
-  console.log(props);
   const { error, data, loading, refetch } = useGetBYOCart(props.userId);
   // const data = useGetBYOCart(props.userId);
-  console.log(props);
-  props.isLoggedIn && console.log(props.isLoggedIn);
+
   if (props.isLoggedIn === true) {
     data && data.getCart.id && Cookies.set("cartId", data.getCart.id);
   }

@@ -11,7 +11,6 @@ const GET_ALL_ORDERS_FOR_USER = gql`
 `;
 
 export const useGetOrderList = (userId) => {
-  console.log(userId);
   const { loading, error, data } = useQuery(GET_ALL_ORDERS_FOR_USER, {
     variables: { userId },
   });

@@ -17,12 +17,6 @@ const UserDetails = () => {
   }
 
   const user = data && data.getUserDetails;
-  console.log(user);
-  // const handleEdit = (props) => {
-  //   // Handle edit button click with user details
-  //   console.log("Edit clicked", user);
-  //   navigate(`/edit-user/${user.id}`);
-  // };
 
   return (
     <Row>

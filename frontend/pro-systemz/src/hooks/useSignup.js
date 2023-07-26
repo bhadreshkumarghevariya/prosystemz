@@ -22,7 +22,6 @@ export const useSignup = () => {
 
   const handleSignup = async (username, email, password) => {
     try {
-      //   console.log(email);
       const response = await signup({
         variables: { username, email, password },
       });
