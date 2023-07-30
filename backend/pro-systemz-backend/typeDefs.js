@@ -63,7 +63,7 @@ const typeDefs = gql`
     checkout: Checkout
     orderStatus: String
     orderDate: String
-    payment: Payment
+    payment: String
   }
 
   input OrderInput {
@@ -71,7 +71,7 @@ const typeDefs = gql`
     checkoutId: ID
     orderStatus: String
     orderDate: String
-    paymentId: ID
+    paymentId: String
   }
 
   input AddressInput {

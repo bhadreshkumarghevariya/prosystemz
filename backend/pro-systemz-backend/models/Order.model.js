@@ -7,7 +7,7 @@ const OrderSchema = new mongoose.Schema({
   checkout: { type: mongoose.Schema.Types.ObjectId, ref: "Checkout" },
   orderStatus: String,
   orderDate: String,
-  payment: { type: mongoose.Schema.Types.ObjectId, ref: "Payment" },
+  payment: String,
 });
 
 const Order = mongoose.model("Order", OrderSchema);

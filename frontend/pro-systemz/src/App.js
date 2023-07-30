@@ -19,9 +19,11 @@ import React from "react";
 import Header from "./components/Header";
 import EditUser from "./pages/EditUser";
 import ShoppingCart from "./pages/ShoppingCart";
-import CheckOut from "./pages/Checkout";
+import PaymentConfirmed from "./pages/PaymentConfirmed";
+// import CheckOut from "./pages/Checkout";
 import Payment from "./pages/Payment";
 import MyOrders from "./pages/MyOrders";
+import Cookies from "js-cookie";
 const PrivateRoute = ({ children, isLoggedIn, component }) => {
   return isLoggedIn ? component : <Navigate to="/login" />;
 };
@@ -30,6 +32,7 @@ function App() {
   const { isLoggedIn, data } = useLoggedInStatus();
 
   const userId = data && data.getUserDetails.id;
+  Cookies.set("userId", userId);
 
   return (
     <div className="App">
@@ -107,18 +110,11 @@ function App() {
             }
           />
           <Route
-            path="checkout"
-            element={
-              <PrivateRoute
-                isLoggedIn={isLoggedIn}
-                component={<CheckOut userId={userId} />}
-              />
-            }
+            path="/payment-confirmed/:?"
+            element={<PaymentConfirmed userId={userId} />}
           />
-          <Route
-            path="/payment/:checkoutId"
-            element={<Payment userId={userId} />}
-          />
+
+          <Route path="/payment/:checkoutId" element={<Payment />} />
           <Route path="/edit-user/:userId" element={<EditUser />} />
           <Route path="/my-orders" element={<MyOrders userId={userId} />} />
           <Route path="/logout" element={<LogoutPage />} />

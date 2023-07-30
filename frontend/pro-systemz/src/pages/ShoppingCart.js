@@ -84,6 +84,7 @@ const ShoppingCart = (props) => {
       },
     });
     result.data.createCheckout.id &&
+      Cookies.set("checkoutId", result.data.createCheckout.id) &&
       navigate("/payment/" + result.data.createCheckout.id);
   };
   return (
