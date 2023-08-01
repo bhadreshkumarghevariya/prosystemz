@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Card } from "react-bootstrap";
 import { useGetOrderList } from "../hooks/useGetOrderList";
-import { Table } from "react-bootstrap";
+import { Table, Badge } from "react-bootstrap";
 const MyOrders = (props) => {
   const userId = props.userId;
 
@@ -27,7 +27,9 @@ const MyOrders = (props) => {
               <tr className="m-3">
                 <td>{order.id}</td>
                 <td>{order.orderDate}</td>
-                <td>{order.orderStatus}</td>
+                <td>
+                  <Badge bg="success">{order.orderStatus}</Badge>
+                </td>
               </tr>
             ))}
           </Table>
