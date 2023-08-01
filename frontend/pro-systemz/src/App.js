@@ -20,6 +20,7 @@ import Header from "./components/Header";
 import EditUser from "./pages/EditUser";
 import ShoppingCart from "./pages/ShoppingCart";
 import PaymentConfirmed from "./pages/PaymentConfirmed";
+import DisplayAllOrders from "./pages/DisplayAllOrders";
 // import CheckOut from "./pages/Checkout";
 import Payment from "./pages/Payment";
 import MyOrders from "./pages/MyOrders";
@@ -109,6 +110,16 @@ function App() {
               />
             }
           />
+          <Route
+            path="/all-orders"
+            element={
+              <PrivateRoute
+                isLoggedIn={isLoggedIn}
+                component={<DisplayAllOrders userId={userId} />}
+              />
+            }
+          />
+
           <Route
             path="/payment-confirmed/:?"
             element={<PaymentConfirmed userId={userId} />}

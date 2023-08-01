@@ -16,6 +16,13 @@ const { generateToken } = require("./utils/authUtils");
 
 const resolvers = {
   Query: {
+    getAllOrders: async () => {
+      return await Order.find()
+        .populate("checkout")
+        .populate("payment")
+        .populate("user");
+    },
+
     getProductType: async () => {
       const productTypes = await ProductType.find();
       return productTypes;
