@@ -28,6 +28,7 @@ const DisplayAllOrders = () => {
                   <th>Payment Id</th>
                   <th>Checkout Id</th>
                   <th>User Id</th>
+                  <th>Update Order Status</th>
                 </tr>
               </thead>
               {isData}
