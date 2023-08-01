@@ -178,6 +178,7 @@ const typeDefs = gql`
     ): Checkout
     createPayment(input: PaymentInput): Payment
     createOrder(input: OrderInput): Order
+    updateOrderStatus(id: ID, orderStatus: String): Order
   }
 `;
 

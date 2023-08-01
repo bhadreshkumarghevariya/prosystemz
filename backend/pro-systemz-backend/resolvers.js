@@ -405,6 +405,13 @@ const resolvers = {
 
       return order;
     },
+
+    updateOrderStatus: async (_, { id, orderStatus }) => {
+      const order = await Order.findById(id);
+      order.orderStatus = orderStatus;
+      await order.save();
+      return order;
+    },
   },
 };
 

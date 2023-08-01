@@ -1,11 +1,30 @@
 import { Badge } from "react-bootstrap";
+import { useState } from "react";
+import useUpdateOrderStatus from "../hooks/useUpdateOrderStatus";
 
 const OrderListItem = ({ order }) => {
+  const [orderStatus, setOrderStatus] = useState(order.orderStatus);
+  const { updateOrderStatus } = useUpdateOrderStatus();
+
+  const handleUpdateOrderStatus = (status) => {
+    console.log(status);
+    // updateOrderStatus(orderId, status);
+    const result = updateOrderStatus({
+      variables: {
+        orderId: order.id,
+        status: status,
+      },
+    });
+    result.then((resolvedData) => {
+      console.log(resolvedData.data.updateOrderStatus.orderStatus);
+      setOrderStatus(status);
+    });
+  };
   return (
     <tr>
       <td>{order.orderDate}</td>
       <td>
-        <Badge bg="success"> {order.orderStatus}</Badge>
+        <Badge bg="success"> {orderStatus}</Badge>
       </td>
       <td>{order.payment}</td>
       <td>{order.checkout.id}</td>
@@ -16,14 +35,14 @@ const OrderListItem = ({ order }) => {
           className="form-select"
           aria-label="Default select example"
           onChange={(e) => {
-            console.log(e.target.value);
-            // updateOrderStatus(order.id, e.target.value);
+            handleUpdateOrderStatus(e.target.value);
           }}
+          value={orderStatus}
         >
-          <option value="paid">paid</option>
-          <option value="packed">packed</option>
-          <option value="shipped">shipped</option>
-          <option value="delivered">delivered</option>
+          <option value="Paid">paid</option>
+          <option value="Packed">packed</option>
+          <option value="Shipped">shipped</option>
+          <option value="Delivered">delivered</option>
         </select>
       </td>
     </tr>
