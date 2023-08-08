@@ -48,7 +48,7 @@ const OrderListItem = ({ order }) => {
         </select>
       </td>
       <td>
-        <Link to={`/orderDetails/${order.id}`}>
+        <Link to={`/order-details/${order.id}`}>
           <DetailsButton />
         </Link>
       </td>

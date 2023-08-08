@@ -31,6 +31,21 @@ const OrderDetails = () => {
                     </Card.Header>
                     <Card.Body className="m-2">
                       <Row>
+                        {/* <Row> */}
+                        {order.user && (
+                          <Col xs={6}>
+                            <h5 className="text-uppercase">User Name</h5>
+                            <p className="mt-2 mb-6">{order.user.username}</p>
+                          </Col>
+                        )}
+
+                        {order.user && (
+                          <Col xs={6}>
+                            <h5 className="text-uppercase">Email</h5>
+                            <p className="mt-2 mb-6">{order.user.email}</p>
+                          </Col>
+                        )}
+                        {/* </Row> */}
                         {order.orderDate && (
                           <Col xs={6}>
                             <h5 className="text-uppercase">Order Date</h5>
@@ -47,30 +62,6 @@ const OrderDetails = () => {
                           <Col xs={6}>
                             <h5 className="text-uppercase">Payment</h5>
                             <p className="mt-2 mb-6">{order.payment}</p>
-                          </Col>
-                        )}
-                      </Row>
-                    </Card.Body>
-                  </Card>
-                </Row>
-                <Row>
-                  <Card className="m-0 p-0">
-                    <Card.Header>
-                      <h4 className="mb-0">User Details</h4>
-                    </Card.Header>
-                    <Card.Body className="m-2">
-                      <Row>
-                        {order.user && (
-                          <Col xs={6}>
-                            <h5 className="text-uppercase">User Name</h5>
-                            <p className="mt-2 mb-6">{order.user.username}</p>
-                          </Col>
-                        )}
-
-                        {order.user && (
-                          <Col xs={6}>
-                            <h5 className="text-uppercase">Email</h5>
-                            <p className="mt-2 mb-6">{order.user.email}</p>
                           </Col>
                         )}
                       </Row>
@@ -138,7 +129,7 @@ const OrderDetails = () => {
                 </Card>
               </Col>
             </Row>
-            <Row>
+            <Row className="my-3">
               <OrderItems
                 shoppingCartId={order.checkout.shoppingCart}
                 userId={order.user.id}

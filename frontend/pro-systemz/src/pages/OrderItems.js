@@ -64,6 +64,10 @@ const OrderItems = (props) => {
           </tbody>
         </Table>
       </Card.Body>
+      <Card.Footer>
+        <h5 className="text-uppercase">Subtotal </h5>
+        {tempCartSubTotal}
+      </Card.Footer>
     </Card>
 
     // <div>
