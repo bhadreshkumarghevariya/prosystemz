@@ -128,6 +128,7 @@ const typeDefs = gql`
     getCartId(userId: ID): ID
     getAllOrdersForUser(userId: ID!): [Order]
     getAllOrders: [Order]
+    getOrderDetails(id: ID!): Order
   }
 
   scalar JSON

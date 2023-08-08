@@ -29,7 +29,7 @@ const CustomerList = ({ isLoggedIn }) => {
             <h3 className="text-center">User List</h3>
           </Card.Header>
 
-          <Card.Body>
+          <Card.Body className="my-1 px-0 py-0 mx-0">
             <Table className="table text-nowrap mb-0 table-centered table-hover m-1">
               <thead className="table-light">
                 <tr>

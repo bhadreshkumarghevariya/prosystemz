@@ -62,7 +62,7 @@ const ProductListItem = (props) => {
           fluid
         />
       </td>
-      <td>{props.productObject.productName}</td>
+      <td className="limited-width-cell">{props.productObject.productName}</td>
       {showProductType === true ? (
         <td>{props.productObject.productType.productTypeName}</td>
       ) : (
@@ -70,7 +70,9 @@ const ProductListItem = (props) => {
       )}
 
       {showProductDetails === true ? (
-        <td>{props.productObject.productShortDescription}</td>
+        <td className="limited-width-cell">
+          {props.productObject.productShortDescription}
+        </td>
       ) : (
         <></>
       )}

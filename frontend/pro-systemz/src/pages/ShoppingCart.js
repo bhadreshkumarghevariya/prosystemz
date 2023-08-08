@@ -44,9 +44,12 @@ const ShoppingCart = (props) => {
   // console.log(shoppingCart.shoppingCart.id);
   // shoppingCartId = shoppingCart.shoppingCart.id;
 
+  const shoppingCartStatus = "Active";
+
   const { error, data, loading, refetch } = useGetShoppingCart(
     shoppingCartId,
-    props.userId
+    props.userId,
+    shoppingCartStatus
   );
   useEffect(() => {
     shoppingCart.shoppingCart &&

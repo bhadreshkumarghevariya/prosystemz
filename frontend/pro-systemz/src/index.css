@@ -34636,3 +34636,16 @@ div.table-responsive>div.dataTables_wrapper>div.row {
   background-color: #fff !important; /* Optional: Add a colored background */
 
 }
+.limited-width-cell {
+  max-width: 100px; /* Set the maximum width */
+  overflow-x: auto;
+}
+.custom-table {
+  width: 100%;
+  margin-bottom: 0;
+  border-collapse: collapse;
+}
+.card-body {
+  max-width: 100%;
+  overflow-x: auto;
+}

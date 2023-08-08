@@ -167,6 +167,13 @@ const resolvers = {
         .populate("user");
       return orders;
     },
+    getOrderDetails: async (_, { id }) => {
+      const order = await Order.findById(id)
+        .populate("checkout")
+        .populate("payment")
+        .populate("user");
+      return order;
+    },
   },
   Mutation: {
     createUserType: async (_, { userTypeName }) => {

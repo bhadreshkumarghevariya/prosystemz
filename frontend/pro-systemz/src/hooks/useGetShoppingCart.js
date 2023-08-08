@@ -35,7 +35,7 @@ export const GET_SHOPPING_CART_QUERY = gql`
 
 export const useGetShoppingCart = (getShoppingCartId, userId, status) => {
   const { error, data, loading, refetch } = useQuery(GET_SHOPPING_CART_QUERY, {
-    variables: { getShoppingCartId, userId, status: "Active" },
+    variables: { getShoppingCartId, userId, status: status },
   });
 
   return { error, loading, data, refetch };

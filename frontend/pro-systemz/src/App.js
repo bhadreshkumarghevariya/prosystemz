@@ -21,6 +21,7 @@ import EditUser from "./pages/EditUser";
 import ShoppingCart from "./pages/ShoppingCart";
 import PaymentConfirmed from "./pages/PaymentConfirmed";
 import DisplayAllOrders from "./pages/DisplayAllOrders";
+import OrderDetails from "./pages/OrderDetails";
 // import CheckOut from "./pages/Checkout";
 import Payment from "./pages/Payment";
 import MyOrders from "./pages/MyOrders";
@@ -61,6 +62,7 @@ function App() {
             path="/product-details/:productId"
             element={<ProductDetails />}
           />
+          <Route path="/order-details/:orderId" element={<OrderDetails />} />
 
           <Route path="/signup" element={<SignupForm />} />
           <Route path="/login" element={<LoginPage />} />

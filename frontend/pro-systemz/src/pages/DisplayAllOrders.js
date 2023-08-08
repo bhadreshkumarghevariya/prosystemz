@@ -19,8 +19,8 @@ const DisplayAllOrders = () => {
           <Card.Header>
             <h3 className="text-center">Orders List</h3>
           </Card.Header>
-          <Card.Body>
-            <Table className="table text-nowrap mb-0 table-centered table-hover m-1">
+          <Card.Body className="m-1 p-1">
+            <Table className="table text-nowrap mb-0 table-centered table-hover m-1 custom-table">
               <thead className="table-light">
                 <tr>
                   <th>Order Date</th>
@@ -29,6 +29,7 @@ const DisplayAllOrders = () => {
                   <th>Checkout Id</th>
                   <th>User Id</th>
                   <th>Update Order Status</th>
+                  <th>View Order Details</th>
                 </tr>
               </thead>
               {isData}

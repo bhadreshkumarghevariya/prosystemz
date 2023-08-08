@@ -16,7 +16,7 @@ const CustomerListItem = ({ user }) => {
   };
   return (
     <tr key={user.id}>
-      <td className="ps-1">
+      <td className="ps-1 m-4 p-3">
         <h5 className="mb-0">{user.username}</h5>
       </td>
       <td>{user.email}</td>

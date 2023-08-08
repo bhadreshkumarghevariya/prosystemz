@@ -11,9 +11,9 @@ const Component = ({ productType }) => {
         className="text-center m-auto my-4 text-center"
         style={{ width: "20rem", height: "20rem" }}
       >
-        <Card.Body>
+        <Card.Body className="custom-card-body">
           <Card.Img
-            className="p-4 rounded-lg"
+            className="p-4 m-4 rounded-lg"
             variant="top"
             src={imageURL}
           ></Card.Img>

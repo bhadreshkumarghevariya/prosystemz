@@ -1,6 +1,8 @@
 import { Badge } from "react-bootstrap";
 import { useState } from "react";
 import useUpdateOrderStatus from "../hooks/useUpdateOrderStatus";
+import DetailsButton from "../components/DetailsButton";
+import { Link } from "react-router-dom";
 
 const OrderListItem = ({ order }) => {
   const [orderStatus, setOrderStatus] = useState(order.orderStatus);
@@ -44,6 +46,11 @@ const OrderListItem = ({ order }) => {
           <option value="Shipped">shipped</option>
           <option value="Delivered">delivered</option>
         </select>
+      </td>
+      <td>
+        <Link to={`/orderDetails/${order.id}`}>
+          <DetailsButton />
+        </Link>
       </td>
     </tr>
   );
