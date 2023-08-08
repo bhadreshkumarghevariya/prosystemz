@@ -3,6 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { useCreateOrder } from "../hooks/useCreateOrder";
 import Cookies from "js-cookie";
 import { Container } from "react-bootstrap";
+import useUpdateShoppingCartStatus from "../hooks/useUpdateShoppingCartStatus";
 
 const PaymentConfirmed = (props) => {
   //   const { payment_intent } = useParams();
@@ -16,6 +17,7 @@ const PaymentConfirmed = (props) => {
   const checkoutId = Cookies.get("checkoutId");
   const { createOrder } = useCreateOrder();
   const [orderId, setOrderId] = useState("");
+  const { updateShoppingCartStatusMutation } = useUpdateShoppingCartStatus();
 
   const handleOrderCreation = async () => {
     const orderInput = {
@@ -33,7 +35,24 @@ const PaymentConfirmed = (props) => {
     setOrderId(orderResult.data.createOrder.id);
     // orderId = orderResult.data.createOrder.id;
     console.log("orderId", orderId);
+
+    const updateShoppingCartStatusId = Cookies.get("shoppingCartId");
+    const status = "Not-Active";
+    const updateShoppingCartStatusResult =
+      await updateShoppingCartStatusMutation({
+        variables: {
+          updateShoppingCartStatusId,
+          status,
+        },
+      });
+    console.log(
+      "updateShoppingCartStatusResult",
+      updateShoppingCartStatusResult
+    );
+    Cookies.remove("cartId");
+    Cookies.remove("shoppingCartId");
   };
+
   useEffect(() => {
     userId && handleOrderCreation();
   }, [userId]);

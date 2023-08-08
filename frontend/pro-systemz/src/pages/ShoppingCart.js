@@ -15,11 +15,14 @@ import UserDetails from "../components/UserDetails";
 import FormControl from "../components/FormControls/FormControl";
 
 import { CREATE_CHECKOUT_MUTATION } from "../mutations/CREATE_CHECKOUT_MUTATION";
+import useGetShoppingCartByUserId from "../hooks/useGetShoppingCartByUserId";
 
 const ShoppingCart = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [shoppingCartId] = useState(Cookies.get("shoppingCartId"));
+  const [shoppingCartId, setShoppingCartId] = useState(
+    Cookies.get("shoppingCartId")
+  );
   const [addressLine1, setAddressLine1] = useState("");
   const [addressLine2, setAddressLine2] = useState("");
   const [city, setCity] = useState("");
@@ -36,18 +39,29 @@ const ShoppingCart = (props) => {
   const [checkout, { data: checkoutData }] = useMutation(
     CREATE_CHECKOUT_MUTATION
   );
+  const shoppingCart = useGetShoppingCartByUserId(props.userId);
+  // console.log("shoppingCart", shoppingCart.shoppingCart);
+  // console.log(shoppingCart.shoppingCart.id);
+  // shoppingCartId = shoppingCart.shoppingCart.id;
 
   const { error, data, loading, refetch } = useGetShoppingCart(
     shoppingCartId,
     props.userId
   );
   useEffect(() => {
+    shoppingCart.shoppingCart &&
+      setShoppingCartId(shoppingCart.shoppingCart.id);
+    shoppingCart.shoppingCart &&
+      Cookies.set("shoppingCartId", shoppingCart.shoppingCart.id);
+
     refetch();
-  }, [location]);
+  }, [location, shoppingCart]);
 
   if (shoppingCartId === undefined) {
     return (
-      <h1>Sorry.... There is no product Available in your current build</h1>
+      <h1>
+        Sorry.... There is no product Available in your current shopping cart
+      </h1>
     );
   }
 

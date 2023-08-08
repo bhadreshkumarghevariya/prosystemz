@@ -8,7 +8,7 @@ const path = require("path");
 const multer = require("multer");
 const cors = require("cors");
 const stripe = require("stripe")(
-  "sk_test_51NZNQ6JFJfq9k7DYsDQSLLEuT3Ydgwk2hlhlATX2ngXaf6yxIDtpj8XhOWChA0EPfo8T1luoLXhjJr8N3uKkJdgZ00Vszg9wD5"
+  "sk_test_51NZNQ6JFJfq9k7DY2kwB0LC55Rw3EZLYspwv7iY2ZlUeh5M4YefVctnmTDbjYO6Rj1FbBRAJjzjTeX0ZBQ2a0UN600X9JiVEST"
 );
 
 const calculateOrderAmount = (items) => {

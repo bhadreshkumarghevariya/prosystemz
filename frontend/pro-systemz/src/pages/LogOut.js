@@ -20,6 +20,8 @@ const LogoutPage = (props) => {
     //clear  cartId cookies react
     Cookies.remove("cartId");
 
+    Cookies.remove("shoppingCartId");
+
     // Reload the entire application after a delay of 500 milliseconds
     setTimeout(() => {
       window.location.reload();

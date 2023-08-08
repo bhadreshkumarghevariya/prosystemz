@@ -40,7 +40,10 @@ const resolvers = {
       if (!userId) {
         throw new Error("You are not authenticated!");
       }
-      const cart = await Cart.findOne({ user: userId }).populate({
+      const cart = await Cart.findOne({
+        user: userId,
+        isAddedtoShoppingCart: false,
+      }).populate({
         path: "products",
         populate: {
           path: "productType",
@@ -48,6 +51,7 @@ const resolvers = {
       });
       return cart;
     },
+
     getUserDetails: async (parent, args, context) => {
       const req = context.req;
       const token = context.token;
@@ -81,13 +85,40 @@ const resolvers = {
 
       return carts;
     },
-    getShoppingCart: async (_, { id, userId }) => {
+    getShoppingCart: async (_, { id, userId, status }) => {
       if (!userId) {
         throw new Error("You are not authenticated!");
       }
       const shoppingCart = await ShoppingCart.findOne({
         _id: id,
         user: userId,
+        status: status,
+      })
+        .populate({
+          path: "products",
+          populate: {
+            path: "productType",
+          },
+        })
+        .populate({
+          path: "carts",
+          populate: {
+            path: "products",
+            populate: {
+              path: "productType",
+            },
+          },
+        });
+
+      return shoppingCart;
+    },
+    getShoppingCartByUserId: async (_, { userId }) => {
+      if (!userId) {
+        throw new Error("You are not authenticated!");
+      }
+      const shoppingCart = await ShoppingCart.findOne({
+        user: userId,
+        status: "Active",
       })
         .populate({
           path: "products",
@@ -231,6 +262,7 @@ const resolvers = {
       const newShoppingCart = await ShoppingCart.create({
         carts: [cartId],
         user: userId,
+        isAddedtoShoppingCart: false,
       });
       //update cart to isAddedtoShoppingCart: true
       const cart = await Cart.findById(cartId);
@@ -238,6 +270,20 @@ const resolvers = {
       await cart.save();
 
       return newShoppingCart.id;
+    },
+    //addCartToShoppingCart(cartId: ID, userId: ID, shoppingCartId: ID): ID
+    addCartToShoppingCart: async (_, { cartId, userId, shoppingCartId }) => {
+      const shoppingCart = await ShoppingCart.findById(shoppingCartId);
+      shoppingCart.carts.push(cartId);
+      await shoppingCart.save();
+
+      //update cart to isAddedtoShoppingCart: true
+      const cart = await Cart.findById(cartId);
+
+      cart.isAddedtoShoppingCart = true;
+      await cart.save();
+
+      return shoppingCart.id;
     },
     createShoppingCartWithProductId: async (_, { productId, userId }) => {
       const newShoppingCart = await ShoppingCart.create({
@@ -411,6 +457,13 @@ const resolvers = {
       order.orderStatus = orderStatus;
       await order.save();
       return order;
+    },
+    //updateShoppingCartStatus(id: ID, status: String): ShoppingCart
+    updateShoppingCartStatus: async (_, { id, status }) => {
+      const shoppingCart = await ShoppingCart.findById(id);
+      shoppingCart.status = status;
+      await shoppingCart.save();
+      return shoppingCart;
     },
   },
 };

@@ -22,6 +22,7 @@ const ProductListItem = (props) => {
 
   const handleCreateCart = async (productId) => {
     let cartId = Cookies.get("cartId");
+    console.log("cartId", cartId);
 
     if (!cartId) {
       createCart({ variables: { productId, userId } })

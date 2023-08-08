@@ -1,8 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 
 export const GET_SHOPPING_CART_QUERY = gql`
-  query GetShoppingCart($getShoppingCartId: ID, $userId: ID) {
-    getShoppingCart(id: $getShoppingCartId, userId: $userId) {
+  query GetShoppingCart($getShoppingCartId: ID, $userId: ID, $status: String) {
+    getShoppingCart(id: $getShoppingCartId, userId: $userId, status: $status) {
       carts {
         cartName
         products {
@@ -33,9 +33,9 @@ export const GET_SHOPPING_CART_QUERY = gql`
   }
 `;
 
-export const useGetShoppingCart = (getShoppingCartId, userId) => {
+export const useGetShoppingCart = (getShoppingCartId, userId, status) => {
   const { error, data, loading, refetch } = useQuery(GET_SHOPPING_CART_QUERY, {
-    variables: { getShoppingCartId, userId },
+    variables: { getShoppingCartId, userId, status: "Active" },
   });
 
   return { error, loading, data, refetch };

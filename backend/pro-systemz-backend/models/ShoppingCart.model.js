@@ -15,6 +15,11 @@ const ShoppingCartSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  //status to check if the cart is active or not
+  status: {
+    type: String,
+    default: "Active",
+  },
 });
 
 const Cart = mongoose.model("ShoppingCart", ShoppingCartSchema);

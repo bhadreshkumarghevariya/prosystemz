@@ -10,14 +10,19 @@ import { useAddBuildToCart } from "../hooks/useAddBuildToCart";
 import { useMutation } from "@apollo/client";
 import { ADD_BUILD_TO_CART_MUTATION } from "../mutations/ADD_BUILD_TO_CART_MUTATION";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
+import { useAddCartToShoppingCart } from "../hooks/useAddCartToShoppingCart";
 // import { useGetCartId } from "../hooks/useGetCartId";
 
 const CurrentBuild = (props) => {
   const location = useLocation();
   const [cartId, setCartId] = useState(Cookies.get("cartId"));
+  const [shoppingCartId, setShoppingCartId] = useState(
+    Cookies.get("shoppingCartId")
+  );
   const [createShoppingCartWithCartId] = useMutation(
     ADD_BUILD_TO_CART_MUTATION
   );
+  const { addCartToShoppingCart } = useAddCartToShoppingCart();
 
   const { error, data, loading, refetch } = useGetBYOCart(props.userId);
   useEffect(() => {
@@ -31,19 +36,31 @@ const CurrentBuild = (props) => {
   }
 
   const handleAddBuildToCart = () => {
-    createShoppingCartWithCartId({
-      variables: { cartId, userId: props.userId },
-    })
-      .then((response) => {
-        Cookies.set(
-          "shoppingCartId",
-          response.data.createShoppingCartWithCartId
-        );
+    if (!shoppingCartId) {
+      createShoppingCartWithCartId({
+        variables: { cartId, userId: props.userId },
       })
-      .catch((error) => {
-        console.error("Error creating cart:", error);
-        return;
+        .then((response) => {
+          Cookies.set(
+            "shoppingCartId",
+            response.data.createShoppingCartWithCartId
+          );
+          Cookies.remove("cartId");
+        })
+        .catch((error) => {
+          console.error("Error creating cart:", error);
+          return;
+        });
+    } else {
+      // const result = addCartToShoppingCart.addCartToShoppingCart();
+      // console.log("result", result);
+      addCartToShoppingCart({
+        variables: { cartId, userId: props.userId, shoppingCartId },
+      }).then((response) => {
+        console.log("response", response);
+        Cookies.remove("cartId");
       });
+    }
   };
 
   if (loading) return <>loading....</>;

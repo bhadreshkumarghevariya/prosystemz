@@ -103,6 +103,7 @@ const typeDefs = gql`
     products: [Product]
     carts: [Cart]
     user: ID
+    status: String
   }
 
   type AuthPayload {
@@ -122,7 +123,8 @@ const typeDefs = gql`
     getUserDetails: User
     getAllUsers: [User]
     getAllUserTypes: [UserType]
-    getShoppingCart(id: ID, userId: ID): ShoppingCart
+    getShoppingCart(id: ID, userId: ID, status: String): ShoppingCart
+    getShoppingCartByUserId(userId: ID): ShoppingCart
     getCartId(userId: ID): ID
     getAllOrdersForUser(userId: ID!): [Order]
     getAllOrders: [Order]
@@ -156,6 +158,7 @@ const typeDefs = gql`
     createCart(productId: ID, userId: ID): ID
     #shopping cart mutations
     createShoppingCartWithCartId(cartId: ID, userId: ID): ID
+    addCartToShoppingCart(cartId: ID, userId: ID, shoppingCartId: ID): ID
     createShoppingCartWithProductId(productId: ID, userId: ID): ID
     addProductToShoppingCart(
       ShoppingCartId: ID
@@ -179,6 +182,8 @@ const typeDefs = gql`
     createPayment(input: PaymentInput): Payment
     createOrder(input: OrderInput): Order
     updateOrderStatus(id: ID, orderStatus: String): Order
+    updateShoppingCartStatus(id: ID, status: String): ShoppingCart
+    # updateCartStatus(id: ID, status: String): Cart
   }
 `;
 
