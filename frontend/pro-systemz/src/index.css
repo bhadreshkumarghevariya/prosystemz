@@ -34649,3 +34649,15 @@ div.table-responsive>div.dataTables_wrapper>div.row {
   max-width: 100%;
   overflow-x: auto;
 }
+
+.byo-component-card-body{
+  overflow-x: unset !important;
+  margin: auto;
+}
+
+.card-img{
+  height: 70px;
+  width: unset !important;
+  margin: 1rem;
+
+}

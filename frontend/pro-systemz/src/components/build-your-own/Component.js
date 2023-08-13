@@ -9,11 +9,11 @@ const Component = ({ productType }) => {
     <Link to={"/product-list/" + productTypeId}>
       <Card
         className="text-center m-auto my-4 text-center"
-        style={{ width: "20rem", height: "20rem" }}
+        style={{ width: "10rem", height: "10rem" }}
       >
-        <Card.Body className="custom-card-body">
+        <Card.Body className="byo-component-card-body">
           <Card.Img
-            className="p-4 m-4 rounded-lg"
+            className="rounded-lg card-img"
             variant="top"
             src={imageURL}
           ></Card.Img>
